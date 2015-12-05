@@ -1,0 +1,41 @@
+body {
+
+}
+
+.heading p {
+  margin-top: -10px;
+}
+
+.container.title {
+  margin-top: 20px;
+}
+
+#mainform {
+  margin-top: 20px;
+}
+
+h2 {
+  margin-top: 30px;
+}
+
+input.missing {
+  border-color: red;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+input#submit {
+  width: 150px;
+}
+
+div.footer {
+  margin-top: 40px;
+  padding: 10px;
+  text-align: center;
+}
+
+.footer a {
+  color: #999;
+}
