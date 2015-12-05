@@ -32,6 +32,10 @@ class TorConfig
         $variables['contactinfo'] = str_replace('@', ' [at] ', $variables['contactinfo']);
         $variables['contactinfo'] = str_replace('.', ' [dot] ', $variables['contactinfo']);
 
+        if(isset($variables['trc-track'])) {
+          $variables['contactinfo'] .= ' [tor-relay.co]';
+        }
+
         // Minimum default config for non-bridge nodes
         $this->config = 'SocksPort 0'.
                      "\nRunAsDaemon 0".

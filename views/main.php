@@ -61,6 +61,11 @@
             <label>Contact Info*</label>
             <input type="text" name="contactinfo" class="u-full-width" placeholder="Your email address (slight obfuscation reduces spam)" required="true">
 
+            <label class="u-full-width">
+              <input type="checkbox" name="trc-track" checked>
+              <span class="label-body">Enable statistics (This will add <code>[tor-relay.co]</code> to your ContactInfo field so I can track the number of relays that are actually running)</span>
+            </label>
+
             <div class="row">
               <div class="six columns">
                 <label for="orport">ORPort*</label>
