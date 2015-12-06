@@ -39,3 +39,8 @@ div.footer {
 .footer a {
   color: #999;
 }
+
+h1>a {
+  text-decoration: none;
+  color: inherit;
+}

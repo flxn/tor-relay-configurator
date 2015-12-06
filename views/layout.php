@@ -41,7 +41,7 @@
   <div class="container title">
     <div class="row">
       <div class="twelve columns">
-        <h1>Tor Relay Configurator</h1>
+        <h1><a href="/">Tor Relay Configurator</a></h1>
         <p>Get your own Tor Relay up and running in 5 minutes. <a href="https://www.torproject.org/about/overview.html.en" target="_blank">What is Tor?</a></p>
       </div>
     </div>
