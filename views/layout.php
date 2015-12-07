@@ -6,7 +6,9 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title><?php echo $title; ?></title>
+  <title>
+    <?php echo $title; ?>
+  </title>
   <meta name="description" content="Set up your own Tor-Relay in minutes with the Tor Relay Configurator.">
   <meta name="author" content="Felix Stein">
 
@@ -49,35 +51,48 @@
 
   <?php echo $main_content; ?>
 
-  <div class="container footer">
-    <div class="row">
-      <div class="ten columns offset-by-one">
-        <p>
-          If you have a problem/question/suggestion email me at <b>mail [at] flxn [dot] de</b> | <a href="https://flxn.de">More of my stuff</a>
-          </p>
-          <p>
-            <a href="https://twitter.com/torrelayco" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @torrelayco</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-            <div id="donatebtndiv">
-              <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                <input type="hidden" name="cmd" value="_s-xclick">
-                <input type="hidden" name="hosted_button_id" value="VFCWGXE2SPM7C">
-                <input type="image" src="https://tor-relay.co/donatebutton.png" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">
-                <img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
-              </form>
+    <div class="container footer">
+      <div class="row">
+        <div class="twelve columns">
+          <div class="row footer">
+            If you have a problem/question/suggestion email me at <b>mail [at] flxn [dot] de</b> | <a href="https://flxn.de">More of my stuff</a>
+          </div>
+          <div class="row">
+            Donate: 14L2vj5UWtccnHxBkc3h1KkSN7bMa157Tm
+          </div>
+          <div class="row footer2">
+            <div class="six columns offset-by-three">
+              <div class="six columns">
+                <!-- Place this tag where you want the button to render. -->
+                <a class="github-button" href="https://github.com/flxn/tor-relay-configurator" data-style="mega" aria-label="flxn/tor-relay-configurator">View on GitHub</a>
+              </div>
+              <div class="six columns">
+                <a href="https://twitter.com/torrelayco" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @torrelayco</a>
+              </div>
             </div>
-          </p>
-
-
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script src="js/main.js"></script>
-  <!-- End Document
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+    <script>
+      ! function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+          p = /^http:/.test(d.location) ? 'http' : 'https';
+        if (!d.getElementById(id)) {
+          js = d.createElement(s);
+          js.id = id;
+          js.src = p + '://platform.twitter.com/widgets.js';
+          fjs.parentNode.insertBefore(js, fjs);
+        }
+      }(document, 'script', 'twitter-wjs');
+    </script>
+    <!-- End Document
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  </body>
+</body>
 
-  </html>
+</html>

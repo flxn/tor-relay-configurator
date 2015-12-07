@@ -44,3 +44,7 @@ h1>a {
   text-decoration: none;
   color: inherit;
 }
+
+.row.footer2 {
+    margin-top: 20px;
+}
