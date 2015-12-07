@@ -1,4 +1,5 @@
 RELEASE='%RELEASE%'
+IS_EXIT=%EXIT%
 INSTALL_ARM=%ARM%
 
 cat << "EOF"
@@ -44,6 +45,14 @@ echo "Setting Tor config..."
 cat << 'EOF' | sudo tee /etc/tor/torrc > /dev/null
 %TORRC%
 EOF
+
+if $IS_EXIT
+then
+  echo "Downloading Exit Notice to /etc/tor/tor-exit-notice.html..."
+  echo "Please edit this file and replace FIXME_YOUR_EMAIL_ADDRESS with your e-mail address!"
+  echo "Also note that this is the US version. If you are not in the US please edit the file and remove the US-Only sections!"
+  sudo wget -q -O /etc/tor/tor-exit-notice.html "https://raw.githubusercontent.com/flxn/tor-relay-configurator/master/misc/tor-exit-notice.html"
+fi
 
 echo "Reloading Tor config..."
 sudo killall -s SIGHUP tor

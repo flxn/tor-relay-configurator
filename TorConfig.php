@@ -61,6 +61,7 @@ class TorConfig
         }
 
         if ($variables['node-type'] == 'exit') {
+            $this->config .= "\nDirFrontPage /etc/tor/tor-exit-notice.html";
             $this->config .= file_get_contents('misc/exitpolicy.txt');
         } else {
             $this->config .=

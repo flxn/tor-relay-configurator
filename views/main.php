@@ -49,7 +49,17 @@
           <p id="exit-info" style="background: rgba(255,0,0,0.1)">
             Running an Exit Node is the best way to help the Tor network but you have to be aware of the risks.
             <br> More Info:
-            <a class="italic" href="https://trac.torproject.org/projects/tor/wiki/doc/TorExitGuidelines" target="_blank">Tor Exit Guidelines</a>
+            <a class="italic" href="https://trac.torproject.org/projects/tor/wiki/doc/TorExitGuidelines" target="_blank">Tor Exit Guidelines</a>,
+            <a class="italic" href="https://blog.torproject.org/running-exit-node" target="_blank">Tips for Running an Exit Node with Minimal Harassment</a>
+            <br>
+            <br>
+            The script will download a notice about exit nodes (<a href="https://gitweb.torproject.org/tor.git/plain/contrib/operator-tools/tor-exit-notice.html">tor-exit-note.html</a>)
+            to <code>/etc/tor/tor-exit-notice.html</code>
+            that will be published on your selected DirPort (Default: 80).
+            <br>
+            This is the US version of the file. Please update the sections accordingly to match the legislation of your country.
+            <br>
+            Please also replace FIXME_YOUR_EMAIL_ADDRESS with your mail address!
           </p>
 
             <div id="field-relayname">

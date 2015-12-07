@@ -74,7 +74,7 @@
             If you have a problem/question/suggestion email me at <b>mail [at] flxn [dot] de</b> | <a href="https://flxn.de">More of my stuff</a>
           </div>
           <div class="row">
-            Donate: 14L2vj5UWtccnHxBkc3h1KkSN7bMa157Tm
+            Donate: <code>14L2vj5UWtccnHxBkc3h1KkSN7bMa157Tm</code>
           </div>
           <div class="row footer2">
             <div class="six columns offset-by-three">
