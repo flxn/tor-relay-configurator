@@ -54,6 +54,8 @@ then
   sudo wget -q -O /etc/tor/tor-exit-notice.html "https://raw.githubusercontent.com/flxn/tor-relay-configurator/master/misc/tor-exit-notice.html"
 fi
 
+sleep 10
+
 echo "Reloading Tor config..."
 sudo killall -s SIGHUP tor
 
