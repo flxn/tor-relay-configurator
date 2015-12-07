@@ -7,10 +7,15 @@ class TorConfig
     function __construct($variables)
     {
         if ($variables['node-type'] != 'bridge' && (!$variables['orport'] || !$variables['relayname'] || !$variables['contactinfo'])) {
-            throw new Exception('Required fields missing.');
+            $missing = array();
+            if(!$variables['orport']) $missing[] = 'ORPort';
+            if(!$variables['relayname']) $missing[] = 'Relay Name';
+            if(!$variables['contactinfo']) $missing[] = 'Contact Info';
+
+            throw new Exception('Required fields missing (' . implode(', ', $missing) . ')');
         }
 
-        if (!is_numeric($variables['orport'])) {
+        if ($variables['orport'] != "auto" && !is_numeric($variables['orport'])) {
             throw new Exception('ORPort must be numeric.');
         }
 
@@ -19,7 +24,7 @@ class TorConfig
         }
 
         $re = '/^[a-zA-Z0-9]{1,19}$/';
-        if (preg_match($re, $variables['relayname']) !== 1) {
+        if ($variables['node-type'] != 'bridge' && preg_match($re, $variables['relayname']) !== 1) {
             throw new Exception('Relay names must be 1-19 characters long and may only contain numbers and letters.');
         }
 
@@ -48,8 +53,7 @@ class TorConfig
              $this->config =
              'ORPort '.$variables['orport'].
              "\nSocksPort 0".
-             "\nBridgeRelay 1".
-             "\nExitpolicy reject *:*";
+             "\nBridgeRelay 1";
          }
 
         if ($variables['dirport']) {
