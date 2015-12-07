@@ -42,9 +42,25 @@
 <body>
   <div class="container title">
     <div class="row">
-      <div class="twelve columns">
+      <div class="seven columns">
         <h1><a href="/">Tor Relay Configurator</a></h1>
         <p>Get your own Tor Relay up and running in 5 minutes. <a href="https://www.torproject.org/about/overview.html.en" target="_blank">What is Tor?</a></p>
+      </div>
+      <div class="five columns statistics">
+        <div class="row">
+          <div class="four columns">
+            <span class="statvalues"></span>
+            Running Servers
+          </div>
+          <div class="four columns">
+            <span class="statvalues"></span>
+            Combined Uptime
+          </div>
+          <div class="four columns">
+            <span class="statvalues"></span>
+            Combined Bandwidth
+          </div>
+        </div>
       </div>
     </div>
   </div>
