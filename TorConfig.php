@@ -34,8 +34,8 @@ class TorConfig
         }
 
         // Apply slight e-mail obfuscation
-        $variables['contactinfo'] = str_replace('@', ' [at] ', $variables['contactinfo']);
-        $variables['contactinfo'] = str_replace('.', ' [dot] ', $variables['contactinfo']);
+        $variables['contactinfo'] = str_replace('@', '(at)', $variables['contactinfo']);
+        $variables['contactinfo'] = str_replace('.', '(dot)', $variables['contactinfo']);
 
         if(isset($variables['trc-track'])) {
           $variables['contactinfo'] .= ' [tor-relay.co]';
