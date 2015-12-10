@@ -1,3 +1,4 @@
 deploy.sh
 *.psd
 userconfigs/
+misc/stats.txt

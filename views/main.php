@@ -77,7 +77,7 @@
             <div id="field-trc-track">
               <label class="u-full-width">
                 <input type="checkbox" name="trc-track" checked>
-                <span class="label-body">Enable statistics (This will add <code>[tor-relay.co]</code> to your ContactInfo field so I can track the number of relays that are actually running)</span>
+                <span class="label-body">Enable statistics<sup>2</sup> (This will add <code>[tor-relay.co]</code> to your ContactInfo field.)</span>
               </label>
             </div>
 
@@ -145,6 +145,9 @@
             <pre><code>lsb_release -a</code></pre>
             if this does not work try
             <pre><code>cat /etc/issue</code></pre>
+          </p>
+          <p>
+            <sup>2</sup> If this is checked your relay uptime and bandwidth will be counted in the global statistics panel on the top right. This is anonymous. No information will be saved.
           </p>
       </div>
     </div>

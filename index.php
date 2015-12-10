@@ -4,9 +4,26 @@ require 'vendor/autoload.php';
 require 'utils.php';
 require 'TorConfig.php';
 
+Flight::set('serverCount', '-');
+Flight::set('combinedUptime', '-');
+Flight::set('combinedBandwidth', '-');
+
+if(file_exists('misc/stats.txt')) {
+  $fh = fopen('misc/stats.txt', 'r');
+  Flight::set('serverCount', intval(fgets($fh, 4096)));
+  Flight::set('combinedUptime', round(intval(fgets($fh, 4069))/60/60) . 'h');
+  Flight::set('combinedBandwidth', round(intval(fgets($fh, 4069))*8/1000/1000) . 'Mb/s');
+  fclose($fh);
+}
+
 Flight::route('GET /', function () {
     Flight::render('main', array('errors' => ''), 'main_content');
-    Flight::render('layout', array('title' => 'Tor Relay Configurator'));
+    Flight::render('layout', array(
+      'title' => 'Tor Relay Configurator',
+      'serverCount' => Flight::get('serverCount'),
+      'combinedUptime' => Flight::get('combinedUptime'),
+      'combinedBandwidth' => Flight::get('combinedBandwidth')
+    ));
 });
 
 Flight::route('POST /', function () {
@@ -42,7 +59,12 @@ Flight::route('POST /', function () {
       Flight::render('main', array('errors' => $e->getMessage()), 'main_content');
   }
 
-  Flight::render('layout', array('title' => 'Tor Relay Configurator | Installation'));
+  Flight::render('layout', array(
+    'title' => 'Tor Relay Configurator | Installation',
+    'serverCount' => Flight::get('serverCount'),
+    'combinedUptime' => Flight::get('combinedUptime'),
+    'combinedBandwidth' => Flight::get('combinedBandwidth')
+  ));
 });
 
 Flight::route('GET /nf/@hash.sh', function ($hash) {
