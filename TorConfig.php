@@ -43,7 +43,7 @@ class TorConfig
 
         // Minimum default config for non-bridge nodes
         $this->config = 'SocksPort 0'.
-                     "\nRunAsDaemon 0".
+                     "\nRunAsDaemon 1".
                      "\nORPort ".$variables['orport'].
                      "\nNickname ".$variables['relayname'].
                      "\nContactInfo ".$variables['contactinfo'];
