@@ -1,8 +1,7 @@
 <?php
-
 class TorConfig
 {
-    private $config = '';
+    private $config = array();
 
     function __construct($variables)
     {
@@ -42,36 +41,37 @@ class TorConfig
         }
 
         // Minimum default config for non-bridge nodes
-        $this->config = 'SocksPort 0'.
-                     "\nRunAsDaemon 1".
-                     "\nORPort ".$variables['orport'].
-                     "\nNickname ".$variables['relayname'].
-                     "\nContactInfo ".$variables['contactinfo'];
+        $baseConfig = array(
+          "SocksPort" => 0,
+          "RunAsDaemon" => 1,
+          "ORPort" => $variables['orport'],
+          "Nickname" => $variables['relayname'],
+          "ContactInfo" => $variables['contactinfo']
+        );
 
-         // Special config for bridge nodes
-         if ($variables['node-type'] == 'bridge') {
-             $this->config =
-             'ORPort '.$variables['orport'].
-             "\nSocksPort 0".
-             "\nBridgeRelay 1";
-         }
+        if ($variables['node-type'] == 'bridge') {
+          // Special config for bridge nodes
+          $baseConfig = array(
+            "ORPort" => $variables['orport'],
+            "SocksPort" => 0,
+            "BridgeRelay" => 1
+          );
+        }
 
         if ($variables['dirport']) {
-            $this->config .= "\nDirPort ".$variables['dirport'];
+            $baseConfig["DirPort"] = $variables['dirport'];
         }
 
         if ($variables['node-type'] == 'exit') {
-            $this->config .= "\nDirFrontPage /etc/tor/tor-exit-notice.html";
-            $this->config .= file_get_contents('misc/exitpolicy.txt');
+            $baseConfig["DirFrontPage"] = "/etc/tor/tor-exit-notice.html";
+            $baseConfig["ExitPolicy"] = explode("\n", file_get_contents('misc/exitpolicy.txt'));
         } else {
-            $this->config .=
-                           "\nExitPolicy reject *:*\n";
+            $baseConfig["ExitPolicy"] = "reject *:*";
         }
 
         if ($variables['bandwidth-rate']) {
-            $this->config .=
-                           "\nRelayBandwidthRate ".$variables['bandwidth-rate'].' MBits'.
-                           "\nRelayBandwidthBurst ".($variables['bandwidth-burst'] ? $variables['bandwidth-burst'] : $variables['bandwidth-rate']).' MBits';
+            $baseConfig["RelayBandwidthRate"] = $variables['bandwidth-rate'].' MBits';
+            $baseConfig["RelayBandwidthBurst"] = ($variables['bandwidth-burst'] ? $variables['bandwidth-burst'] : $variables['bandwidth-rate']).' MBits';
         }
 
         if ($variables['traffic-limit']) {
@@ -80,21 +80,41 @@ class TorConfig
                 $limit *= 1000;
             }
 
-            $this->config .=
-                           "\nAccountingStart month 1 00:00".
-                           "\nAccountingMax ".floor($limit / 2).' GB';
+            $baseConfig["AccountingStart"] = "month 1 00:00";
+            $baseConfig["AccountingMax"] = floor($limit / 2).' GB';
         }
 
         if (isset($variables['enable-arm'])) {
-            $this->config .=
-                             "\nDisableDebuggerAttachment 0".
-                             "\nControlPort 9051".
-                             "\nCookieAuthentication 1";
+            $baseConfig["DisableDebuggerAttachment"] = 0;
+            $baseConfig["ControlPort"] = 9051;
+            $baseConfig["CookieAuthentication"] = 1;
         }
+
+        $this -> config = $baseConfig;
     }
 
     public function getTorrc()
     {
-      return $this->config;
+      $torrcString = '';
+
+      foreach ($this -> config as $key => $value) {
+        if(!is_array($value) && trim($value) == "") {
+          continue;
+        }
+
+        if(is_array($value)) {
+            foreach ($value as $val) {
+              if(trim($val) == "") {
+                continue;
+              }
+
+              $torrcString .= $key . ' ' . $val . "\n";
+            }
+        } else {
+          $torrcString .= $key . ' ' . $value . "\n";
+        }
+      }
+
+      return $torrcString;
     }
 }
