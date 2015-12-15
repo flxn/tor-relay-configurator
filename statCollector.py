@@ -18,7 +18,7 @@ try:
         if searchString in str(desc.contact):
             trcCount += 1
             combinedUptime += desc.uptime
-            combinedBandwidth += desc.average_bandwidth
+            combinedBandwidth += desc.observed_bandwidth
 
 except Exception as exc:
     print exc
