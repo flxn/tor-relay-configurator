@@ -71,7 +71,7 @@
       <div class="row">
         <div class="twelve columns">
           <div class="row footer">
-            If you have a problem/question/suggestion email me at <b>mail [at] flxn [dot] de</b> | <a href="https://flxn.de">More of my stuff</a>
+            If you have a problem/question/suggestion email me at <b>mail [at] flxn [dot] de</b> | <a href="https://tooly.xyz">All-in-One Developer Toolbox</a> | <a href="https://flxn.de">More of my stuff</a>
           </div>
           <div class="row">
             Donate: <code>14L2vj5UWtccnHxBkc3h1KkSN7bMa157Tm</code>
