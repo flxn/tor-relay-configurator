@@ -1,16 +1,20 @@
 <?php
-
 class TorConfig
 {
-    private $config = '';
+    private $config = array();
 
     function __construct($variables)
     {
         if ($variables['node-type'] != 'bridge' && (!$variables['orport'] || !$variables['relayname'] || !$variables['contactinfo'])) {
-            throw new Exception('Required fields missing.');
+            $missing = array();
+            if(!$variables['orport']) $missing[] = 'ORPort';
+            if(!$variables['relayname']) $missing[] = 'Relay Name';
+            if(!$variables['contactinfo']) $missing[] = 'Contact Info';
+
+            throw new Exception('Required fields missing (' . implode(', ', $missing) . ')');
         }
 
-        if (!is_numeric($variables['orport'])) {
+        if ($variables['orport'] != "auto" && !is_numeric($variables['orport'])) {
             throw new Exception('ORPort must be numeric.');
         }
 
@@ -19,7 +23,7 @@ class TorConfig
         }
 
         $re = '/^[a-zA-Z0-9]{1,19}$/';
-        if (preg_match($re, $variables['relayname']) !== 1) {
+        if ($variables['node-type'] != 'bridge' && preg_match($re, $variables['relayname']) !== 1) {
             throw new Exception('Relay names must be 1-19 characters long and may only contain numbers and letters.');
         }
 
@@ -29,44 +33,45 @@ class TorConfig
         }
 
         // Apply slight e-mail obfuscation
-        $variables['contactinfo'] = str_replace('@', ' [at] ', $variables['contactinfo']);
-        $variables['contactinfo'] = str_replace('.', ' [dot] ', $variables['contactinfo']);
+        $variables['contactinfo'] = str_replace('@', '(at)', $variables['contactinfo']);
+        $variables['contactinfo'] = str_replace('.', '(dot)', $variables['contactinfo']);
 
         if(isset($variables['trc-track'])) {
           $variables['contactinfo'] .= ' [tor-relay.co]';
         }
 
         // Minimum default config for non-bridge nodes
-        $this->config = 'SocksPort 0'.
-                     "\nRunAsDaemon 0".
-                     "\nORPort ".$variables['orport'].
-                     "\nNickname ".$variables['relayname'].
-                     "\nContactInfo ".$variables['contactinfo'];
+        $baseConfig = array(
+          "SocksPort" => 0,
+          "RunAsDaemon" => 1,
+          "ORPort" => $variables['orport'],
+          "Nickname" => $variables['relayname'],
+          "ContactInfo" => $variables['contactinfo']
+        );
 
-         // Special config for bridge nodes
-         if ($variables['node-type'] == 'bridge') {
-             $this->config =
-             'ORPort '.$variables['orport'].
-             "\nSocksPort 0".
-             "\nBridgeRelay 1".
-             "\nExitpolicy reject *:*";
-         }
+        if ($variables['node-type'] == 'bridge') {
+          // Special config for bridge nodes
+          $baseConfig = array(
+            "ORPort" => $variables['orport'],
+            "SocksPort" => 0,
+            "BridgeRelay" => 1
+          );
+        }
 
         if ($variables['dirport']) {
-            $this->config .= "\nDirPort ".$variables['dirport'];
+            $baseConfig["DirPort"] = $variables['dirport'];
         }
 
         if ($variables['node-type'] == 'exit') {
-            $this->config .= file_get_contents('misc/exitpolicy.txt');
+            $baseConfig["DirFrontPage"] = "/etc/tor/tor-exit-notice.html";
+            $baseConfig["ExitPolicy"] = explode("\n", file_get_contents('misc/exitpolicy.txt'));
         } else {
-            $this->config .=
-                           "\nExitPolicy reject *:*\n";
+            $baseConfig["ExitPolicy"] = "reject *:*";
         }
 
         if ($variables['bandwidth-rate']) {
-            $this->config .=
-                           "\nRelayBandwidthRate ".$variables['bandwidth-rate'].' MBits'.
-                           "\nRelayBandwidthBurst ".($variables['bandwidth-burst'] ? $variables['bandwidth-burst'] : $variables['bandwidth-rate']).' MBits';
+            $baseConfig["RelayBandwidthRate"] = $variables['bandwidth-rate'].' MBits';
+            $baseConfig["RelayBandwidthBurst"] = ($variables['bandwidth-burst'] ? $variables['bandwidth-burst'] : $variables['bandwidth-rate']).' MBits';
         }
 
         if ($variables['traffic-limit']) {
@@ -75,21 +80,41 @@ class TorConfig
                 $limit *= 1000;
             }
 
-            $this->config .=
-                           "\nAccountingStart month 1 00:00".
-                           "\nAccountingMax ".floor($limit / 2).' GB';
+            $baseConfig["AccountingStart"] = "month 1 00:00";
+            $baseConfig["AccountingMax"] = floor($limit / 2).' GB';
         }
 
         if (isset($variables['enable-arm'])) {
-            $this->config .=
-                             "\nDisableDebuggerAttachment 0".
-                             "\nControlPort 9051".
-                             "\nCookieAuthentication 1";
+            $baseConfig["DisableDebuggerAttachment"] = 0;
+            $baseConfig["ControlPort"] = 9051;
+            $baseConfig["CookieAuthentication"] = 1;
         }
+
+        $this -> config = $baseConfig;
     }
 
     public function getTorrc()
     {
-      return $this->config;
+      $torrcString = '';
+
+      foreach ($this -> config as $key => $value) {
+        if(!is_array($value) && trim($value) == "") {
+          continue;
+        }
+
+        if(is_array($value)) {
+            foreach ($value as $val) {
+              if(trim($val) == "") {
+                continue;
+              }
+
+              $torrcString .= $key . ' ' . $val . "\n";
+            }
+        } else {
+          $torrcString .= $key . ' ' . $value . "\n";
+        }
+      }
+
+      return $torrcString;
     }
 }

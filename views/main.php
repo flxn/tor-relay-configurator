@@ -31,13 +31,13 @@
           <label class="u-full-width">
             <input type="radio" name="node-type" value="relay" checked>
             <span class="label-body">Relay
-              <span style="font-style:italic;font-size:12px;">(Default; <b>You probably want to keep this selected</b>)</span>
+              <span style="font-style:italic;font-size:12px;">(Default; You probably want to keep this selected)</span>
             </span>
           </label>
           <label class="u-full-width">
-            <input type="radio" name="node-type" value="bridge" disabled>
+            <input type="radio" name="node-type" value="bridge">
             <span class="label-body">Bridge
-              <span style="font-style:italic;font-size:12px;">(Currently disabled)</span>
+              <span style="font-style:italic;font-size:12px;"></span>
             </span>
           </label>
           <label class="u-full-width">
@@ -49,39 +49,58 @@
           <p id="exit-info" style="background: rgba(255,0,0,0.1)">
             Running an Exit Node is the best way to help the Tor network but you have to be aware of the risks.
             <br> More Info:
-            <a class="italic" href="https://trac.torproject.org/projects/tor/wiki/doc/TorExitGuidelines" target="_blank">Tor Exit Guidelines</a>
+            <a class="italic" href="https://trac.torproject.org/projects/tor/wiki/doc/TorExitGuidelines" target="_blank">Tor Exit Guidelines</a>,
+            <a class="italic" href="https://blog.torproject.org/running-exit-node" target="_blank">Tips for Running an Exit Node with Minimal Harassment</a>
+            <br>
+            <br>
+            The script will download a notice about exit nodes (<a href="https://gitweb.torproject.org/tor.git/plain/contrib/operator-tools/tor-exit-notice.html">tor-exit-note.html</a>)
+            to <code>/etc/tor/tor-exit-notice.html</code>
+            that will be published on your selected DirPort (Default: 80).
+            <br>
+            This is the US version of the file. Please update the sections accordingly to match the legislation of your country.
+            <br>
+            Please also replace FIXME_YOUR_EMAIL_ADDRESS with your mail address!
           </p>
 
-          <div class="hideBridge">
-            <label>Relay Name*
-              <span style="font-style:italic;font-size:12px;">(1 to 19 characters, only letters and numbers, no spaces or other special characters)</span>
-            </label>
-            <input type="text" name="relayname" class="u-full-width" placeholder="The nickname of your relay" required="true">
+            <div id="field-relayname">
+              <label>Relay Name*
+                <span style="font-style:italic;font-size:12px;">(1 to 19 characters, only letters and numbers, no spaces or other special characters)</span>
+              </label>
+              <input type="text" name="relayname" class="u-full-width" placeholder="The nickname of your relay">
+            </div>
 
-            <label>Contact Info*</label>
-            <input type="text" name="contactinfo" class="u-full-width" placeholder="Your email address (slight obfuscation reduces spam)" required="true">
+            <div id="field-contactinfo">
+              <label>Contact Info*</label>
+              <input type="text" name="contactinfo" class="u-full-width" placeholder="Your email address (slight obfuscation reduces spam)">
+            </div>
 
-            <label class="u-full-width">
-              <input type="checkbox" name="trc-track" checked>
-              <span class="label-body">Enable statistics (This will add <code>[tor-relay.co]</code> to your ContactInfo field so I can track the number of relays that are actually running)</span>
-            </label>
+            <div id="field-trc-track">
+              <label class="u-full-width">
+                <input type="checkbox" name="trc-track" checked>
+                <span class="label-body">Enable statistics<sup>2</sup> (This will add <code>[tor-relay.co]</code> to your ContactInfo field.)</span>
+              </label>
+            </div>
 
             <div class="row">
               <div class="six columns">
-                <label for="orport">ORPort*</label>
-                <input type="text" name="orport" class="u-full-width" value="9001" id="orport" required="true">
+                <div id="field-orport">
+                  <label for="orport">ORPort*</label>
+                  <input type="text"  name="orport" class="u-full-width" value="9001" id="orport" required="true">
+                </div>
               </div>
 
               <div class="six columns">
-                <label for="dirport">DirPort</label>
-                <input type="text" name="dirport" class="u-full-width" value="9030" id="dirport">
+                <div id="field-dirport">
+                  <label for="dirport">DirPort</label>
+                  <input type="text" name="dirport" class="u-full-width" value="9030" id="dirport">
+                </div>
               </div>
             </div>
 
             <label for="traffic-total">Total (Up + Down) monthly traffic limit (empty for no limit)</label>
             <div class="row">
               <div class="ten columns">
-                <input type="text" name="traffic-limit" id="traffic-total" class="only-numbers u-full-width" placeholder="e.g. 10TB (= 5TB Upstream traffic + 5TB Downstream traffic)">
+                <input type="text" name="traffic-limit" class="only-numbers u-full-width" placeholder="e.g. 10TB (= 5TB Upstream traffic + 5TB Downstream traffic)">
               </div>
               <div class="two columns">
                 <select class="u-full-width" name="traffic-unit">
@@ -93,11 +112,11 @@
             <div class="row">
               <div class="six columns">
                 <label for="bandwidth-rate">Maximum bandwidth (empty for no limit)</label>
-                <input type="text" name="bandwidth-rate" id="bandwidth-rate" class="only-numbers u-full-width" placeholder="Value in Mb/s (Megabits/second)">
+                <input type="text" name="bandwidth-rate" class="only-numbers u-full-width" placeholder="Value in Mb/s (Megabits/second)">
               </div>
               <div class="six columns">
                 <label for="bandwidth-burst">Maximum burst bandwidth</label>
-                <input type="text" name="bandwidth-burst" id="bandwidth-burst" class="only-numbers u-full-width" placeholder="Value in Mb/s (Megabits/second)">
+                <input type="text" name="bandwidth-burst" class="only-numbers u-full-width" placeholder="Value in Mb/s (Megabits/second)">
               </div>
             </div>
 
@@ -105,7 +124,6 @@
               <input type="checkbox" name="enable-arm">
               <span class="label-body">Enable monitoring through <a href="https://www.atagar.com/arm/" target="_blank">arm</a></span>
             </label>
-          </div>
 
           <input id="submit" type="submit" class="button-primary u-pull-right" name="submit" value="submit">
         </form>
@@ -127,6 +145,9 @@
             <pre><code>lsb_release -a</code></pre>
             if this does not work try
             <pre><code>cat /etc/issue</code></pre>
+          </p>
+          <p>
+            <sup>2</sup> If this is checked your relay uptime and bandwidth will be counted in the global statistics panel on the top right. This is anonymous. No information will be saved.
           </p>
       </div>
     </div>
