@@ -53,7 +53,7 @@
     <div class="row">
       <div class="ten columns offset-by-one">
         <p>
-          If you have a problem/question/suggestion email me at <b>mail [at] flxn [dot] de</b> | <a href="https://flxn.de">More of my stuff</a>
+          If you have a problem/question/suggestion email me at <b>mail [at] flxn [dot] de</b> | <a href="https://flxn.de">More of my stuff</a> | <a href="https://tooly.xyz">All-in-One Developer Toolbox</a>
           </p>
           <p>
             <a href="https://twitter.com/torrelayco" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @torrelayco</a>
