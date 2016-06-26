@@ -19,8 +19,8 @@
           <select name="os" id="os-select">
             <option value="precise">Ubuntu Precise Pangolin (12.04)</option>
             <option value="trusty" selected>Ubuntu Trusty Tahr (14.04)</option>
-            <option value="vivid">Ubuntu Vivid Vervet (15.04)</option>
             <option value="wily">Ubuntu Wily Werewolf (15.10)</option>
+            <option value="xenial">Xenial Xerus (16.04)</option>
             <option value="squeeze">Debian Squeeze (6.0)</option>
             <option value="wheezy">Debian Wheezy (7)</option>
             <option value="jessie">Debian Jessie (8)</option>
