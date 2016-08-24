@@ -44,7 +44,10 @@
     <div class="row">
       <div class="seven columns">
         <h1><a href="/">Tor Relay Configurator</a></h1>
-        <p>Get your own Tor Relay up and running in 5 minutes. <a href="https://www.torproject.org/about/overview.html.en" target="_blank">What is Tor?</a></p>
+        <p>
+          Get your own Tor Relay up and running in 5 minutes. <a href="https://www.torproject.org/about/overview.html.en" target="_blank">What is Tor?</a><br/>
+          <a href="https://flxn.de/blog/tor-relay-tutorial" target="_blank">Visit my blog</a> for a tutorial on how to use the tor-relay.co generator.
+        </p>
       </div>
       <div class="five columns statistics" title="Statistics updated daily">
         <div class="row">
