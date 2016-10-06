@@ -6,6 +6,49 @@
         <p>
           You can run your Tor relay on every supported linux machine that you have SSH access to, be it in your home, a virtual server, or a dedicated server.
           <br> But not every hoster or ISP allows Tor relays in their network.
+          <h3>Server providers</h3>
+          <table class="u-full-width">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Server Location</th>
+                <th>Middle Node (Relay)</th>
+                <th>Exit Node</th>
+                <th>Link</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="http://partners.webmasterplan.com/click.asp?ref=750458&site=4208&type=text&tnb=31">Contabo</a></td>
+                <td>DE</td>
+                <td>yes</td>
+                <td>yes</td>
+                <td><a href="http://partners.webmasterplan.com/click.asp?ref=750458&site=4208&type=text&tnb=31">View Page</a></td>
+              </tr>
+              <tr>
+                <td><a href="https://m.do.co/c/7a1a3669128b">Digital Ocean</a></td>
+                <td>Multiple (US, UK, FR, NL, ...)</td>
+                <td>yes</td>
+                <td>no</td>
+                <td><a href="https://m.do.co/c/7a1a3669128b">View Page</a></td>
+              </tr>
+              <tr>
+                <td><a href="https://panel.linevast.de/aff.php?aff=416">Linevast</a></td>
+                <td>DE</td>
+                <td>yes</td>
+                <td>yes</td>
+                <td><a href="https://panel.linevast.de/aff.php?aff=416">View Page</a></td>
+              </tr>
+              <tr>
+                <td><a href="https://www.yourserver.se/portal/aff.php?aff=329">Yourserver</a></td>
+                <td>SWE, LVA</td>
+                <td>yes</td>
+                <td>no</td>
+                <td><a href="https://www.yourserver.se/portal/aff.php?aff=329">View Page</a></td>
+              </tr>
+            </tbody>
+          </table>
+          <i>The links in the table above are affiliate links. If you want to support this page you can purchase a product through one of these links and I will get a small percentage of your sale value. 100% of the money will be used for maintenance of this site and my own Tor relays.</i>
           <br> You can find a comprehensive list of Tor-friendly companys on the <a href="https://trac.torproject.org/projects/tor/wiki/doc/GoodBadISPs" target="_blank">official Tor wiki</a>.
         </p>
       </div>
