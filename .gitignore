@@ -2,3 +2,4 @@ deploy.sh
 *.psd
 userconfigs/
 misc/stats.txt
+misc/nodes.txt

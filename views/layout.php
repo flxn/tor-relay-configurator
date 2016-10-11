@@ -65,6 +65,14 @@
           </div>
         </div>
       </div>
+      <div class="twelve columns topnodes">
+          <strong>Top 5 Nodes</strong>
+              <ul>
+                  <?php for($i = 0; $i < 5; $i++){ ?>
+                      <li><?=$i+1?>. <?=$nodes[$i]['name']?> (<?=$nodes[$i]['bandwidth']?>Mb/s)</li>
+                  <?php } ?>
+              </ul>
+        </div>
     </div>
   </div>
 

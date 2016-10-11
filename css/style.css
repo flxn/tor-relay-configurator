@@ -60,3 +60,14 @@ h1>a {
   border-radius: 3px;
   padding: 10px 20px 10px 20px;
 }
+
+.topnodes {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 10px 10px 0 10px;
+}
+
+.topnodes ul li {
+    display: inline;
+    margin-right: 10px;
+}

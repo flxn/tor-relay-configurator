@@ -16,13 +16,26 @@ if(file_exists('misc/stats.txt')) {
   fclose($fh);
 }
 
+Flight::set('nodeslist', array());
+if(file_exists('misc/nodes.txt')) {
+    $nodes = explode("\n", file_get_contents('misc/nodes.txt'));
+    $nodeslist = array();
+    foreach ($nodes as $node) {
+        list($name, $bandwidth) = explode(';', $node);
+        $bandwidth = round($bandwidth * 8 / 1000 / 1000, 2);
+        $nodeslist[] = array('name' => $name, 'bandwidth' => $bandwidth);
+    }
+    Flight::set('nodeslist', $nodeslist);
+}
+
 Flight::route('GET /', function () {
     Flight::render('main', array('errors' => ''), 'main_content');
     Flight::render('layout', array(
       'title' => 'Tor Relay Configurator',
       'serverCount' => Flight::get('serverCount'),
       'combinedUptime' => Flight::get('combinedUptime'),
-      'combinedBandwidth' => Flight::get('combinedBandwidth')
+      'combinedBandwidth' => Flight::get('combinedBandwidth'),
+      'nodes' => Flight::get('nodeslist')
     ));
 });
 
