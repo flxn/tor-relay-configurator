@@ -76,7 +76,8 @@ Flight::route('POST /', function () {
     'title' => 'Tor Relay Configurator | Installation',
     'serverCount' => Flight::get('serverCount'),
     'combinedUptime' => Flight::get('combinedUptime'),
-    'combinedBandwidth' => Flight::get('combinedBandwidth')
+    'combinedBandwidth' => Flight::get('combinedBandwidth'),
+    'nodes' => Flight::get('nodeslist')
   ));
 });
 
