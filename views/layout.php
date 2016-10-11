@@ -65,6 +65,7 @@
           </div>
         </div>
       </div>
+      <?php if(count($nodes) >= 5) { ?>
       <div class="twelve columns topnodes">
           <strong>Top 5 Nodes</strong>
               <ul>
@@ -73,6 +74,7 @@
                   <?php } ?>
               </ul>
         </div>
+        <?php } ?>
     </div>
   </div>
 
