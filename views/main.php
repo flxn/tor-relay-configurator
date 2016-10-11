@@ -46,6 +46,13 @@
                 <td>no</td>
                 <td><a href="https://www.yourserver.se/portal/aff.php?aff=329">View Page</a></td>
               </tr>
+              <tr>
+                <td><a href="http://partners.webmasterplan.com/click.asp?ref=750458&site=5938&type=text&tnb=24">Strato</a></td>
+                <td>DE</td>
+                <td>yes</td>
+                <td>no</td>
+                <td><a href="http://partners.webmasterplan.com/click.asp?ref=750458&site=5938&type=text&tnb=24">View Page</a></td>
+              </tr>
             </tbody>
           </table>
           <i>The links in the table above are affiliate links. If you want to support this page you can purchase a product through one of these links and I will get a small percentage of your sale value. 100% of the money will be used for maintenance of this site and my own Tor relays.</i>
