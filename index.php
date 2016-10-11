@@ -21,6 +21,7 @@ if(file_exists('misc/nodes.txt')) {
     $nodes = explode("\n", file_get_contents('misc/nodes.txt'));
     $nodeslist = array();
     foreach ($nodes as $node) {
+        if(trim($node) == "") continue;
         list($name, $bandwidth) = explode(';', $node);
         $bandwidth = round($bandwidth * 8 / 1000 / 1000, 2);
         $nodeslist[] = array('name' => $name, 'bandwidth' => $bandwidth);
