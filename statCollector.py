@@ -23,7 +23,7 @@ try:
             combinedBandwidth += desc.observed_bandwidth
             nodes.append({'name': desc.nickname, 'bandwidth': desc.observed_bandwidth})
 except Exception as exc:
-    print exc
+    print(exc)
 
 with open(os.path.join(os.path.dirname(__file__), 'misc/stats.txt'), 'w') as fh:
     fh.write(str(trcCount))
@@ -39,6 +39,7 @@ with open(os.path.join(os.path.dirname(__file__), 'misc/nodes.txt'), 'w') as fh:
         fh.write(str(node['name']) + ';' + str(node['bandwidth']))
         fh.write("\n")
 
-print trcCount
-print combinedUptime
-print combinedBandwidth
+print(trcCount)
+print(combinedUptime)
+print(combinedBandwidth)
+print(nodes)
