@@ -52,7 +52,7 @@ Flight::route('POST /', function () {
 
       // Load script template and replace template variables
       $template = file_get_contents('misc/install.template');
-      $template = str_replace('%RELEASE%', $req->data['os'], $template);
+      $template = str_replace('%RELEASE%', escapeshellcmd($req->data['os']), $template);
       $template = str_replace('%TORRC%', $torrc, $template);
       $template = str_replace('%ARM%', isset($req->data['enable-arm']) ? 'true' : 'false', $template);
       $template = str_replace('%EXIT%', ($req->data['node-type'] == 'exit') ? 'true' : 'false', $template);

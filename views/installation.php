@@ -22,7 +22,7 @@
             </p>
             <?php endif; ?>
             <h3>Torrc Preview</h3>
-            <pre><code><?php echo $torrc; ?></code></pre>
+            <pre><code><?php echo htmlspecialchars($torrc, ENT_QUOTES, 'UTF-8'); ?></code></pre>
           </div>
         </div>
         <div class="row">
