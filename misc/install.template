@@ -22,7 +22,7 @@ echo "deb http://deb.torproject.org/torproject.org $RELEASE main" | sudo tee /et
 echo "deb-src http://deb.torproject.org/torproject.org $RELEASE main" | sudo tee --append /etc/apt/sources.list.d/tor.list > /dev/null
 
 echo "Adding GPG key..."
-gpg --keyserver keys.gnupg.net --recv 886DDD89 > /dev/null
+gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 > /dev/null
 gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add - > /dev/null
 
 echo "Updating package list..."
