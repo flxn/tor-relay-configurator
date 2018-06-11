@@ -63,7 +63,7 @@ class TorConfig
         }
 
         if ($variables['node-type'] == 'exit') {
-            $baseConfig["DirFrontPage"] = "/etc/tor/tor-exit-notice.html";
+            $baseConfig["DirPortFrontPage"] = "/etc/tor/tor-exit-notice.html";
             $baseConfig["ExitPolicy"] = explode("\n", file_get_contents('misc/exitpolicy.txt'));
         } else {
             $baseConfig["ExitPolicy"] = "reject *:*";
