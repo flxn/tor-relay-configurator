@@ -76,17 +76,6 @@
       </div>
       <?php } ?>
     </div>
-    <div class="row">
-      <div class="twelve columns patreon">
-        <strong>The Patreon Experiment</strong>
-        <p>
-        You want to support Tor but you don't want to manage your own node or you don't have enough experience to set up your own server?<br>
-        <a href="https://www.patreon.com/flxn" target="_blank">I created a Patreon page to collect donations to fund a fleet of community Tor nodes:</a> <a href="https://www.patreon.com/flxn" target="_blank">https://www.patreon.com/flxn</a><br>
-        The community nodes and the list of my Patreons will be featured on this page.<br>
-        Thank you for your support!
-        </p>
-      </div>
-    </div>
   </div>
 
   <?php echo $main_content; ?>
