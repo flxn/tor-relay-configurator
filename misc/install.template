@@ -1,6 +1,7 @@
 RELEASE='%RELEASE%'
 IS_EXIT=%EXIT%
 INSTALL_ARM=%ARM%
+CHECK_IPV6=%CHECKIPV6%
 
 cat << "EOF"
 
@@ -45,6 +46,20 @@ echo "Setting Tor config..."
 cat << 'EOF' | sudo tee /etc/tor/torrc > /dev/null
 %TORRC%
 EOF
+
+if $CHECK_IPV6
+then
+  IPV6_ADDRESS=$(ip -6 addr | grep inet6 | grep "scope global" | awk '{print $2}' | cut -d'/' -f1)
+  if [ -z ${var+x} ]
+  then
+    echo "\e[31mCould not automatically find your IPv6 address!"
+    echo "\e[31mPlease manually replace INSERT_IPV6_ADDRESS in file /etc/tor/torrc"
+  else
+    sudo sed "s/INSERT_IPV6_ADDRESS/$IPV6_ADDRESS/" /etc/tor/torrc
+    echo "IPv6 Support enabled for: $IPV6_ADDRESS"
+  fi
+  
+fi
 
 if $IS_EXIT
 then

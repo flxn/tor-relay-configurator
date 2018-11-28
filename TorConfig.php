@@ -58,6 +58,10 @@ class TorConfig
           );
         }
 
+        if (isset($variables['ipv6'])) {
+            $baseConfig["ORPort"] = array($baseConfig["ORPort"], "[INSERT_IPV6_ADDRESS]:".$baseConfig["ORPort"]);
+        }
+
         if ($variables['dirport']) {
             $baseConfig["DirPort"] = $variables['dirport'];
         }
@@ -65,8 +69,9 @@ class TorConfig
         if ($variables['node-type'] == 'exit') {
             $baseConfig["DirPortFrontPage"] = "/etc/tor/tor-exit-notice.html";
             $baseConfig["ExitPolicy"] = explode("\n", file_get_contents('misc/exitpolicy.txt'));
+            $baseConfig["IPv6Exit"] = isset($variables["ipv6"]) ? 1 : 0;
         } else {
-            $baseConfig["ExitPolicy"] = "reject *:*";
+            $baseConfig["ExitPolicy"] = (isset($variables["ipv6"]) ? "reject6 *:*, " : "")."reject *:*";
         }
 
         if ($variables['bandwidth-rate']) {

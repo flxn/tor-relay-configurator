@@ -131,6 +131,13 @@
               </label>
             </div>
 
+            <div id="field-ipv6">
+              <label class="u-full-width">
+                <input type="checkbox" name="ipv6" checked>
+                <span class="label-body">Enable IPv6 support (<a href="https://trac.torproject.org/projects/tor/wiki/doc/IPv6RelayHowto" target="_blank">More info</a>)</span>
+              </label>
+            </div>
+
             <div class="row">
               <div class="six columns">
                 <div id="field-orport">
