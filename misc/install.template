@@ -2,8 +2,8 @@ RELEASE='%RELEASE%'
 IS_EXIT=%EXIT%
 INSTALL_ARM=%ARM%
 
+echo -e "\e[36m" #cyan
 cat << "EOF"
-
 
  _____            ___     _
 |_   _|__ _ _ ___| _ \___| |__ _ _  _   __ ___
@@ -11,10 +11,12 @@ cat << "EOF"
   |_|\___/_|     |_|_\___|_\__,_|\_, (_)__\___/
                                  |__/
 
-              [Relay Setup]
-This script will ask for your sudo password.
-----------------------------------------------------------------------
 EOF
+
+echo -e "\e[39m" #default
+echo "              [Relay Setup]"
+echo "This script will ask for your sudo password."
+echo "----------------------------------------------------------------------"
 
 echo "Adding apt repository..."
 sudo touch /etc/apt/sources.list.d/tor.list
