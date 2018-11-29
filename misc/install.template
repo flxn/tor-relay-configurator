@@ -3,8 +3,8 @@ IS_EXIT=%EXIT%
 INSTALL_ARM=%ARM%
 CHECK_IPV6=%CHECKIPV6%
 
+echo -e "\e[36m" #cyan
 cat << "EOF"
-
 
  _____            ___     _
 |_   _|__ _ _ ___| _ \___| |__ _ _  _   __ ___
@@ -12,10 +12,12 @@ cat << "EOF"
   |_|\___/_|     |_|_\___|_\__,_|\_, (_)__\___/
                                  |__/
 
-              [Relay Setup]
-This script will ask for your sudo password.
-----------------------------------------------------------------------
 EOF
+
+echo -e "\e[39m" #default
+echo "              [Relay Setup]"
+echo "This script will ask for your sudo password."
+echo "----------------------------------------------------------------------"
 
 echo "Updating package list..."
 sudo apt-get -y update > /dev/null
@@ -57,8 +59,8 @@ then
   IPV6_ADDRESS=$(ip -6 addr | grep inet6 | grep "scope global" | awk '{print $2}' | cut -d'/' -f1)
   if [ -z ${var+x} ]
   then
-    echo "\e[31mCould not automatically find your IPv6 address!"
-    echo "\e[31mPlease manually replace INSERT_IPV6_ADDRESS in file /etc/tor/torrc"
+    echo -e "\e[31mCould not automatically find your IPv6 address!"
+    echo -e "\e[31mPlease manually replace INSERT_IPV6_ADDRESS in file /etc/tor/torrc"
   else
     sudo sed -i "s/INSERT_IPV6_ADDRESS/$IPV6_ADDRESS/" /etc/tor/torrc
     echo "IPv6 Support enabled for: $IPV6_ADDRESS"

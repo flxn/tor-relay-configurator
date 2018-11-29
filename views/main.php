@@ -2,11 +2,11 @@
   <div class="container">
     <div class="row">
       <div class="twelve columns">
-        <h2>0) Hosting</h2>
-        <p>
+        <h2>0) Prerequisites</h2>
+          <h3>Hosting</h3>
+          <p>
           You can run your Tor relay on every supported linux machine that you have SSH access to, be it in your home, a virtual server, or a dedicated server.
           <br> But not every hoster or ISP allows Tor relays in their network.
-          <h3>Server providers</h3>
           <table class="u-full-width">
             <thead>
               <tr>
@@ -57,7 +57,15 @@
           </table>
           <i>The links in the table above are affiliate links. If you want to support this page you can purchase a product through one of these links and I will get a small percentage of your sale value. 100% of the money will be used for maintenance of this site and my own Tor relays.</i>
           <br> You can find a comprehensive list of Tor-friendly companys on the <a href="https://trac.torproject.org/projects/tor/wiki/doc/GoodBadISPs" target="_blank">official Tor wiki</a>.
-        </p>
+         </p>
+         <h3>Sudo</h3>
+         <p>In order to run correctly the install script requires that the sudo command is installed on your server.
+           <br>To check if it is already installed simply run <code>sudo</code> in your terminal. If you get a response like 
+           <code>-bash: sudo: command not found</code> follow these steps on how to install it: <a href="/install-sudo-on-debian">Sudo installation tutorial</a>
+         </p>
+         <h3>Curl</h3>
+         <p>To download the script to your server you also need curl.
+           <br> To install it run the following command: <code>sudo apt install curl</code>.</p>
       </div>
     </div>
 
@@ -184,7 +192,7 @@
 
           <input id="submit" type="submit" class="button-primary u-pull-right" name="submit" value="submit">
         </form>
-        <?php if($errors): ?>
+        <?php if ($errors) : ?>
           <p style="color: red; font-weight: bold; font-size: 1.75rem;">
             Error: <?php echo $errors; ?>
           </p>

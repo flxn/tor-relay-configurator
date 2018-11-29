@@ -92,8 +92,17 @@ Flight::route('GET /nf/@hash.sh', function ($hash) {
   } catch (Exception $e) {
     echo 'echo "There was an error fetching your generated script! Please return to tor-relay.co and try again."';
   }
+});
 
-
+Flight::route('GET /install-sudo-on-debian', function () {
+  Flight::render('install-sudo', array(), 'main_content');
+  Flight::render('layout', array(
+    'title' => 'Tor Relay Configurator',
+    'serverCount' => Flight::get('serverCount'),
+    'combinedUptime' => Flight::get('combinedUptime'),
+    'combinedBandwidth' => Flight::get('combinedBandwidth'),
+    'nodes' => Flight::get('nodeslist')
+  ));
 });
 
 Flight::start();
