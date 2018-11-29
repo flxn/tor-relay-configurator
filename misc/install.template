@@ -17,21 +17,26 @@ This script will ask for your sudo password.
 ----------------------------------------------------------------------
 EOF
 
-echo "Adding apt repository..."
-sudo touch /etc/apt/sources.list.d/tor.list
-echo "deb http://deb.torproject.org/torproject.org $RELEASE main" | sudo tee /etc/apt/sources.list.d/tor.list > /dev/null
-echo "deb-src http://deb.torproject.org/torproject.org $RELEASE main" | sudo tee --append /etc/apt/sources.list.d/tor.list > /dev/null
+echo "Updating package list..."
+sudo apt-get -y update > /dev/null
 
-echo "Adding GPG key..."
+echo "Installing necessary packages..."
+sudo apt-get -y install apt-transport-https psmisc dirmngr ntpdate > /dev/null
+
+echo "Updating NTP..."
+sudo ntpdate pool.ntp.org > /dev/null
+
+echo "Adding Torproject apt repository..."
+sudo touch /etc/apt/sources.list.d/tor.list
+echo "deb https://deb.torproject.org/torproject.org $RELEASE main" | sudo tee /etc/apt/sources.list.d/tor.list > /dev/null
+echo "deb-src https://deb.torproject.org/torproject.org $RELEASE main" | sudo tee --append /etc/apt/sources.list.d/tor.list > /dev/null
+
+echo "Adding Torproject GPG key..."
 gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 > /dev/null
 gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add - > /dev/null
 
 echo "Updating package list..."
 sudo apt-get -y update > /dev/null
-
-echo "Installing NTP..."
-sudo apt-get -y install ntpdate > /dev/null
-sudo ntpdate pool.ntp.org > /dev/null
 
 if $INSTALL_ARM
 then
@@ -55,7 +60,7 @@ then
     echo "\e[31mCould not automatically find your IPv6 address!"
     echo "\e[31mPlease manually replace INSERT_IPV6_ADDRESS in file /etc/tor/torrc"
   else
-    sudo sed "s/INSERT_IPV6_ADDRESS/$IPV6_ADDRESS/" /etc/tor/torrc
+    sudo sed -i "s/INSERT_IPV6_ADDRESS/$IPV6_ADDRESS/" /etc/tor/torrc
     echo "IPv6 Support enabled for: $IPV6_ADDRESS"
   fi
   
@@ -77,7 +82,7 @@ sudo killall -s SIGHUP tor
 echo "Setup finished"
 echo "----------------------------------------------------------------------"
 echo "Tor will now check if your ports are reachable. This may take up to 20 minutes."
-echo "Check /var/log/tor/log for an entry like:"
+echo "Check /var/log/tor/notices.log for an entry like:"
 echo "\"Self-testing indicates your ORPort is reachable from the outside. Excellent.\""
 echo "----------------------------------------------------------------------"
 #sleep 5

@@ -56,6 +56,7 @@ Flight::route('POST /', function () {
       $template = str_replace('%TORRC%', $torrc, $template);
       $template = str_replace('%ARM%', isset($req->data['enable-arm']) ? 'true' : 'false', $template);
       $template = str_replace('%EXIT%', ($req->data['node-type'] == 'exit') ? 'true' : 'false', $template);
+      $template = str_replace('%CHECKIPV6%', isset($req->data['ipv6']) ? 'true' : 'false', $template);
 
       // Write script to file
       if (!file_exists('userconfigs/')) {

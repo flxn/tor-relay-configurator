@@ -58,6 +58,8 @@ class TorConfig
           );
         }
 
+        $baseConfig["Log"] = "notice file /var/log/tor/notices.log";
+
         if (isset($variables['ipv6'])) {
             $baseConfig["ORPort"] = array($baseConfig["ORPort"], "[INSERT_IPV6_ADDRESS]:".$baseConfig["ORPort"]);
         }
