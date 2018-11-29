@@ -57,7 +57,7 @@ EOF
 if $CHECK_IPV6
 then
   IPV6_ADDRESS=$(ip -6 addr | grep inet6 | grep "scope global" | awk '{print $2}' | cut -d'/' -f1)
-  if [ -z ${var+x} ]
+  if [ -z "$IPV6_ADDRESS" ]
   then
     echo -e "\e[31mCould not automatically find your IPv6 address!"
     echo -e "\e[31mPlease manually replace INSERT_IPV6_ADDRESS in file /etc/tor/torrc"
@@ -65,14 +65,14 @@ then
     sudo sed -i "s/INSERT_IPV6_ADDRESS/$IPV6_ADDRESS/" /etc/tor/torrc
     echo "IPv6 Support enabled for: $IPV6_ADDRESS"
   fi
-  
+
 fi
 
 if $IS_EXIT
 then
   echo "Downloading Exit Notice to /etc/tor/tor-exit-notice.html..."
-  echo "Please edit this file and replace FIXME_YOUR_EMAIL_ADDRESS with your e-mail address!"
-  echo "Also note that this is the US version. If you are not in the US please edit the file and remove the US-Only sections!"
+  echo -e "\e[1mPlease edit this file and replace FIXME_YOUR_EMAIL_ADDRESS with your e-mail address!"
+  echo -e "\e[1mAlso note that this is the US version. If you are not in the US please edit the file and remove the US-Only sections!\e[0m"
   sudo wget -q -O /etc/tor/tor-exit-notice.html "https://raw.githubusercontent.com/flxn/tor-relay-configurator/master/misc/tor-exit-notice.html"
 fi
 
