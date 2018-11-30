@@ -48,25 +48,12 @@ fi
 
 echo "Installing Tor..."
 sudo apt-get -y install tor deb.torproject.org-keyring > /dev/null
+sudo chown -R debian-tor:debian-tor /var/log/tor
 
 echo "Setting Tor config..."
 cat << 'EOF' | sudo tee /etc/tor/torrc > /dev/null
 %TORRC%
 EOF
-
-if $CHECK_IPV6
-then
-  IPV6_ADDRESS=$(ip -6 addr | grep inet6 | grep "scope global" | awk '{print $2}' | cut -d'/' -f1)
-  if [ -z "$IPV6_ADDRESS" ]
-  then
-    echo -e "\e[31mCould not automatically find your IPv6 address!"
-    echo -e "\e[31mPlease manually replace INSERT_IPV6_ADDRESS in file /etc/tor/torrc"
-  else
-    sudo sed -i "s/INSERT_IPV6_ADDRESS/$IPV6_ADDRESS/" /etc/tor/torrc
-    echo "IPv6 Support enabled for: $IPV6_ADDRESS"
-  fi
-
-fi
 
 if $IS_EXIT
 then
@@ -76,12 +63,31 @@ then
   sudo wget -q -O /etc/tor/tor-exit-notice.html "https://raw.githubusercontent.com/flxn/tor-relay-configurator/master/misc/tor-exit-notice.html"
 fi
 
+if $CHECK_IPV6
+then
+  IPV6_ADDRESS=$(ip -6 addr | grep inet6 | grep "scope global" | awk '{print $2}' | cut -d'/' -f1)
+  if [ -z "$IPV6_ADDRESS" ]
+  then
+    sudo /etc/init.d/tor stop
+    echo -e "\e[31mCould not automatically find your IPv6 address"
+    sudo sed -i -e '/INSERT_IPV6_ADDRESS/d' /etc/tor/torrc
+    sudo sed -i -e 's/IPv6Exit 1/IPv6Exit 0/' /etc/tor/torrc
+    echo -e "\e[31mIPv6 support has been disabled\e[39m"
+    echo "If you want to enable it manually find out your IPv6 address and add this line to your /etc/tor/torrc"
+    echo "ORPort [YOUR_IPV6_ADDRESS]:YOUR_ORPORT (example: \"ORPort [2001:123:4567:89ab::1]:9001\")"
+    echo "Then run \"sudo /etc/init.d/tor restart\" to rstart Tor"
+  else
+    sudo sed -i "s/INSERT_IPV6_ADDRESS/$IPV6_ADDRESS/" /etc/tor/torrc
+    echo -e "\e[32mIPv6 Support enabled ($IPV6_ADDRESS)\e[39m"
+  fi
+fi
+
 sleep 10
 
 echo "Reloading Tor config..."
-sudo killall -s SIGHUP tor
+sudo /etc/init.d/tor restart
 
-echo "Setup finished"
+echo -e "\e[32mSetup finished\e[39m"
 echo "----------------------------------------------------------------------"
 echo "Tor will now check if your ports are reachable. This may take up to 20 minutes."
 echo "Check /var/log/tor/notices.log for an entry like:"
