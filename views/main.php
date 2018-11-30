@@ -75,14 +75,14 @@
         <form action="/" method="post" id="mainform">
           <label>Operating System*<sup>1</sup> (Currently Ubuntu and Debian only. More options in the future)</label>
           <select name="os" id="os-select">
-            <option value="precise">Ubuntu Precise Pangolin (12.04)</option>
-            <option value="trusty" selected>Ubuntu Trusty Tahr (14.04)</option>
-            <option value="xenial">Xenial Xerus (16.04)</option>
-            <option value="wheezy">Debian Wheezy (7)</option>
-            <option value="jessie">Debian Jessie (8)</option>
-            <option value="stretch">Debian Stretch (9)</option>
+            <option value="jessie">Debian oldstable (jessie)</option>
+            <option value="stretch" selected="selected">Debian stable (stretch)</option>
             <option value="buster">Debian testing (buster)</option>
             <option value="sid">Debian unstable (sid)</option>
+            <option value="trusty">Ubuntu Trusty Tahr (14.04 LTS)</option>
+            <option value="xenial">Ubuntu Xenial Xerus (16.04 LTS)</option>
+            <option value="artful">Ubuntu Artful Aardvark (17.10)</option>
+            <option value="bionic">Ubuntu Bionic Beaver (18.04 LTS)</option>
           </select>
 
           <label>Tor node type*</label>
