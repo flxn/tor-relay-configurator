@@ -3,3 +3,4 @@ deploy.sh
 userconfigs/
 misc/stats.txt
 misc/nodes.txt
+.vscode/
