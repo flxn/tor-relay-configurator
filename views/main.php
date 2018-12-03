@@ -139,6 +139,13 @@
               </label>
             </div>
 
+            <div id="field-unattended-upgrades">
+              <label class="u-full-width">
+                <input type="checkbox" name="unattended-upgrades" checked>
+                <span class="label-body">Enable unattended upgrades (Automatically install latest security patches and Tor updates)</span>
+              </label>
+            </div>
+
             <div class="row">
               <div class="six columns">
                 <div id="field-orport">
