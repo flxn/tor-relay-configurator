@@ -4,3 +4,4 @@ userconfigs/
 misc/stats.txt
 misc/nodes.txt
 .vscode/
+*.db
