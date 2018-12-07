@@ -86,7 +86,7 @@ fi
 if $ENABLE_AUTO_UPDATE
 then
   echo "Enabling unattended upgrades..."
-  sudo apt-get -y unattended-upgrades apt-listchanges
+  sudo apt-get install -y unattended-upgrades apt-listchanges
   DISTRO=$(lsb_release -is)
   sudo wget -q -O /etc/apt/apt.conf.d/50unattended-upgrades "https://raw.githubusercontent.com/flxn/tor-relay-configurator/master/misc/50unattended-upgrades.$DISTRO"
 fi
