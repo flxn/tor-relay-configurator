@@ -87,7 +87,7 @@
             If you have a problem/question/suggestion email me at <b>mail [at] flxn [dot] de</b> | <a href="https://flxn.de">More of my stuff</a>
           </div>
           <div class="row">
-            Donate: <code>14L2vj5UWtccnHxBkc3h1KkSN7bMa157Tm</code>
+            Donate: <code>14L2vj5UWtccnHxBkc3h1KkSN7bMa157Tm</code> | Website currently at commit: <a href="https://github.com/flxn/tor-relay-configurator/commit/<?=$currentCommit?>"><?=$currentCommit?></a>
           </div>
           <div class="row footer2">
             <div class="six columns offset-by-three">

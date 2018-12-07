@@ -13,6 +13,7 @@ if(file_exists('misc/stats.txt')) {
   Flight::set('serverCount', intval(fgets($fh, 4096)));
   Flight::set('combinedUptime', round(intval(fgets($fh, 4069))/60/60) . 'h');
   Flight::set('combinedBandwidth', round(intval(fgets($fh, 4069))*8/1000/1000) . 'Mb/s');
+  Flight::set('currentCommit', trim(exec('git log --pretty="%h" -n1 HEAD')));
   fclose($fh);
 }
 
@@ -36,6 +37,7 @@ Flight::route('GET /', function () {
       'serverCount' => Flight::get('serverCount'),
       'combinedUptime' => Flight::get('combinedUptime'),
       'combinedBandwidth' => Flight::get('combinedBandwidth'),
+      'currentCommit' => Flight::get('currentCommit'),
       'nodes' => Flight::get('nodeslist')
     ));
 });
@@ -80,6 +82,7 @@ Flight::route('POST /', function () {
     'serverCount' => Flight::get('serverCount'),
     'combinedUptime' => Flight::get('combinedUptime'),
     'combinedBandwidth' => Flight::get('combinedBandwidth'),
+    'currentCommit' => Flight::get('currentCommit'),
     'nodes' => Flight::get('nodeslist')
   ));
 });
@@ -102,6 +105,7 @@ Flight::route('GET /install-sudo-on-debian', function () {
     'serverCount' => Flight::get('serverCount'),
     'combinedUptime' => Flight::get('combinedUptime'),
     'combinedBandwidth' => Flight::get('combinedBandwidth'),
+    'currentCommit' => Flight::get('currentCommit'),
     'nodes' => Flight::get('nodeslist')
   ));
 });
