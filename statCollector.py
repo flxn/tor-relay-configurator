@@ -48,8 +48,10 @@ def parseDescriptor(desc):
     descDict = {}
     for field in list(NODE_FIELDS.keys()) + list(STAT_FIELDS.keys()):
         descDict[field] = getattr(desc, field)
-    descDict["platform"] = str(descDict["platform"])
-    descDict["contact"] = str(descDict["contact"])
+    if desc.platform:
+        descDict["platform"] = desc.platform.decode('utf-8', 'replace')
+    if desc.contact:
+        descDict["contact"] = desc.contact.decode('utf-8', 'replace')
     descDict["tor_version"] = str(descDict["tor_version"])
     descDict["bridge_distribution"] = str(descDict["bridge_distribution"])
     descDict["family"] = json.dumps(list(descDict["family"]))
@@ -90,20 +92,20 @@ nodes = list()
 try:
     for desc in query.run():
         desc = parseDescriptor(desc)
-        if TRC_CONTACT_IDENTIFIER in desc["contact"]:
+        if desc["contact"] and TRC_CONTACT_IDENTIFIER in desc["contact"]:
             trcCount += 1
             combinedUptime += desc["uptime"]
             combinedBandwidth += desc["observed_bandwidth"]
             nodes.append({'name': desc["nickname"], 'bandwidth': desc["observed_bandwidth"]})
 
-            insert_sql = "INSERT OR IGNORE INTO nodes(" + ", ".join(NODE_FIELDS.keys()) + ") "\
+            insert_sql = "INSERT OR REPLACE INTO nodes(" + ", ".join(NODE_FIELDS.keys()) + ") "\
                         + "VALUES(" + ",".join(["?"] * len(NODE_FIELDS)) + ")"
             try:
                 c.execute(insert_sql, tuple([desc[field] for field in NODE_FIELDS.keys()]))
             except sqlite3.Error as e:
                 print("SQLITE Error:", e)
 
-            insert_sql = "INSERT OR IGNORE INTO stats(node, measured, " + ", ".join(STAT_FIELDS.keys()) + ") "\
+            insert_sql = "INSERT OR REPLACE INTO stats(node, measured, " + ", ".join(STAT_FIELDS.keys()) + ") "\
                         + "VALUES(?,?," + ",".join(["?"] * len(STAT_FIELDS)) + ")"
             try:
                 c.execute(insert_sql, tuple([desc["fingerprint"], datetime.datetime.now()] + [desc[field] for field in STAT_FIELDS.keys()]))
