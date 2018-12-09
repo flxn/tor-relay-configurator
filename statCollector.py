@@ -88,6 +88,7 @@ combinedUptime = 0
 combinedBandwidth = 0
 
 nodes = list()
+measurement_time = datetime.datetime.now()
 
 try:
     for desc in query.run():
@@ -108,7 +109,7 @@ try:
             insert_sql = "INSERT OR REPLACE INTO stats(node, measured, " + ", ".join(STAT_FIELDS.keys()) + ") "\
                         + "VALUES(?,?," + ",".join(["?"] * len(STAT_FIELDS)) + ")"
             try:
-                c.execute(insert_sql, tuple([desc["fingerprint"], datetime.datetime.now()] + [desc[field] for field in STAT_FIELDS.keys()]))
+                c.execute(insert_sql, tuple([desc["fingerprint"], measurement_time] + [desc[field] for field in STAT_FIELDS.keys()]))
             except sqlite3.Error as e:
                 print("SQLITE Error:", e)     
 except Exception as exc:
