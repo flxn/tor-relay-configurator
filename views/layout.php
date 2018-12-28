@@ -18,7 +18,7 @@
 
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600" rel="stylesheet" type="text/css">
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -53,7 +53,7 @@
         <div class="row">
           <div class="four columns">
             <span class="statvalues"><?=$serverCount?></span>
-            Running Servers
+            Running<br>Servers
           </div>
           <div class="four columns">
             <span class="statvalues"><?=$combinedUptime?></span>
@@ -65,17 +65,26 @@
           </div>
         </div>
       </div>
-      <?php if(count($nodes) >= 5) { ?>
-      <div class="twelve columns topnodes">
-          <strong>Top 5 Nodes</strong>
-          <ul>
-              <?php for($i = 0; $i < 5; $i++){ ?>
-                  <li><?=$i+1?>. <?=$nodes[$i]['name']?> (<?=$nodes[$i]['bandwidth']?>Mb/s)</li>
-              <?php } ?>
-          </ul>
-      </div>
-      <?php } ?>
     </div>
+
+      <div class="row">
+        <div class="four columns">
+          <canvas id="chartNodes" height="240"></canvas>
+        </div>
+        <div class="four columns">
+            <canvas id="chartBandwidth" height="240"></canvas>
+        </div>
+        <div class="four columns">
+            <div class="topnodes">
+                <strong>Top 5 Nodes</strong>
+                <ul>
+                    <?php for($i = 0; $i < 5; $i++){ ?>
+                        <li><?=$nodes[$i]['name']?> (<?=$nodes[$i]['bandwidth']?>Mb/s)</li>
+                    <?php } ?>
+                </ul>
+            </div>
+        </div>
+      </div>
   </div>
 
   <?php echo $main_content; ?>
@@ -106,6 +115,12 @@
 
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/Chart.min.js"></script>
+    <script>
+      var bandwidthChartData = <?=$bandwidthChartData?>;
+      var nodesChartData = <?=$nodesChartData?>;
+    </script>
     <script src="js/main.js"></script>
     <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
     <script>

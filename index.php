@@ -3,6 +3,9 @@
 require 'vendor/autoload.php';
 require 'utils.php';
 require 'TorConfig.php';
+require 'TRCStats.php';
+
+date_default_timezone_set('UTC');
 
 Flight::set('serverCount', '-');
 Flight::set('combinedUptime', '-');
@@ -31,6 +34,7 @@ if(file_exists('misc/nodes.txt')) {
 }
 
 Flight::route('GET /', function () {
+    $stats = new TRCStats();
     Flight::render('main', array('errors' => ''), 'main_content');
     Flight::render('layout', array(
       'title' => 'Tor Relay Configurator',
@@ -38,11 +42,14 @@ Flight::route('GET /', function () {
       'combinedUptime' => Flight::get('combinedUptime'),
       'combinedBandwidth' => Flight::get('combinedBandwidth'),
       'currentCommit' => Flight::get('currentCommit'),
-      'nodes' => Flight::get('nodeslist')
+      'nodes' => Flight::get('nodeslist'),
+      'bandwidthChartData' => json_encode($stats->getBandwidthOverTime(30)),
+      'nodesChartData' => json_encode($stats->getNodesOverTime(30))
     ));
 });
 
 Flight::route('POST /', function () {
+  $stats = new TRCStats();
   $req = Flight::request();
   try {
       $torConfig = new TorConfig($req->data);
@@ -83,7 +90,9 @@ Flight::route('POST /', function () {
     'combinedUptime' => Flight::get('combinedUptime'),
     'combinedBandwidth' => Flight::get('combinedBandwidth'),
     'currentCommit' => Flight::get('currentCommit'),
-    'nodes' => Flight::get('nodeslist')
+    'nodes' => Flight::get('nodeslist'),
+    'bandwidthChartData' => json_encode($stats->getBandwidthOverTime(30)),
+    'nodesChartData' => json_encode($stats->getNodesOverTime(30))
   ));
 });
 
