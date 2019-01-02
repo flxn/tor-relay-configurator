@@ -13,10 +13,13 @@ Flight::set('combinedBandwidth', '-');
 
 if(file_exists('misc/stats.txt')) {
   $fh = fopen('misc/stats.txt', 'r');
+  $stats = new TRCStats();
   Flight::set('serverCount', intval(fgets($fh, 4096)));
   Flight::set('combinedUptime', round(intval(fgets($fh, 4069))/60/60) . 'h');
   Flight::set('combinedBandwidth', round(intval(fgets($fh, 4069))*8/1000/1000) . 'Mb/s');
   Flight::set('currentCommit', trim(exec('git log --pretty="%h" -n1 HEAD')));
+  Flight::set('bandwidthChartJson', json_encode($stats->getBandwidthOverTime(30)));
+  Flight::set('nodesChartJson', json_encode($stats->getNodesOverTime(30)));
   fclose($fh);
 }
 
@@ -34,7 +37,6 @@ if(file_exists('misc/nodes.txt')) {
 }
 
 Flight::route('GET /', function () {
-    $stats = new TRCStats();
     Flight::render('main', array('errors' => ''), 'main_content');
     Flight::render('layout', array(
       'title' => 'Tor Relay Configurator',
@@ -43,13 +45,12 @@ Flight::route('GET /', function () {
       'combinedBandwidth' => Flight::get('combinedBandwidth'),
       'currentCommit' => Flight::get('currentCommit'),
       'nodes' => Flight::get('nodeslist'),
-      'bandwidthChartData' => json_encode($stats->getBandwidthOverTime(30)),
-      'nodesChartData' => json_encode($stats->getNodesOverTime(30))
+      'bandwidthChartData' => Flight::get('bandwidthChartJson'),
+      'nodesChartData' => Flight::get('nodesChartJson')
     ));
 });
 
 Flight::route('POST /', function () {
-  $stats = new TRCStats();
   $req = Flight::request();
   try {
       $torConfig = new TorConfig($req->data);
@@ -91,8 +92,8 @@ Flight::route('POST /', function () {
     'combinedBandwidth' => Flight::get('combinedBandwidth'),
     'currentCommit' => Flight::get('currentCommit'),
     'nodes' => Flight::get('nodeslist'),
-    'bandwidthChartData' => json_encode($stats->getBandwidthOverTime(30)),
-    'nodesChartData' => json_encode($stats->getNodesOverTime(30))
+    'bandwidthChartData' => Flight::get('bandwidthChartJson'),
+    'nodesChartData' => Flight::get('nodesChartJson')
   ));
 });
 
@@ -115,7 +116,9 @@ Flight::route('GET /install-sudo-on-debian', function () {
     'combinedUptime' => Flight::get('combinedUptime'),
     'combinedBandwidth' => Flight::get('combinedBandwidth'),
     'currentCommit' => Flight::get('currentCommit'),
-    'nodes' => Flight::get('nodeslist')
+    'nodes' => Flight::get('nodeslist'),
+    'bandwidthChartData' => Flight::get('bandwidthChartJson'),
+    'nodesChartData' => Flight::get('nodesChartJson')
   ));
 });
 
