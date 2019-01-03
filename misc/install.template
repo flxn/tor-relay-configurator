@@ -24,7 +24,7 @@ echo "Updating package list..."
 sudo apt-get -y update > /dev/null
 
 echo "Installing necessary packages..."
-sudo apt-get -y install apt-transport-https psmisc dirmngr ntpdate > /dev/null
+sudo apt-get -y install apt-transport-https psmisc dirmngr ntpdate python-pip> /dev/null
 
 echo "Updating NTP..."
 sudo ntpdate pool.ntp.org > /dev/null
@@ -43,8 +43,8 @@ sudo apt-get -y update > /dev/null
 
 if $INSTALL_ARM
 then
-  echo "Installing ARM..."
-  sudo apt-get -y install tor-arm > /dev/null
+  echo "Installing Nyx..."
+  sudo pip install nyx > /dev/null
 fi
 
 echo "Installing Tor..."
