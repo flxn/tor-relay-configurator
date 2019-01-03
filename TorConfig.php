@@ -92,7 +92,6 @@ class TorConfig
         }
 
         if (isset($variables['enable-arm'])) {
-            $baseConfig["DisableDebuggerAttachment"] = 0;
             $baseConfig["ControlPort"] = 9051;
             $baseConfig["CookieAuthentication"] = 1;
         }
