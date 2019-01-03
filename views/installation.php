@@ -17,8 +17,8 @@
             <pre><code id="shellcode">wget https://tor-relay.co/nf/<?=$configFile?>&#10;less <?=$configFile?>&#10;bash <?=$configFile?></code></pre>
             <?php if($arm): ?>
             <p>
-              To monitor your relay start arm with
-              <pre><code>sudo -u debian-tor arm</code></pre>
+              To monitor your relay start nyx with
+              <pre><code>sudo -u debian-tor nyx</code></pre>
             </p>
             <?php endif; ?>
             <h3>Torrc Preview</h3>
