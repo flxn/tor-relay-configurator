@@ -12,7 +12,7 @@ class TRCStats
     public function getNodesOverTime($days = -1)
     {
         $data = array();
-        $limit = $days > 0 ? $days * 12 : -1;
+        $limit = $days > 0 ? $days + 1 : -1;
         try {
             $result = $this->db->query("
                 SELECT measured, count(*) 

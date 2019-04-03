@@ -18,8 +18,8 @@ if(file_exists('misc/stats.txt')) {
   Flight::set('combinedUptime', round(intval(fgets($fh, 4069))/60/60) . 'h');
   Flight::set('combinedBandwidth', round(intval(fgets($fh, 4069))*8/1000/1000) . 'Mb/s');
   Flight::set('currentCommit', trim(exec('git log --pretty="%h" -n1 HEAD')));
-  Flight::set('bandwidthChartJson', json_encode($stats->getBandwidthOverTime(30)));
-  Flight::set('nodesChartJson', json_encode($stats->getNodesOverTime(30)));
+  Flight::set('bandwidthChartJson', json_encode($stats->getBandwidthOverTime(60)));
+  Flight::set('nodesChartJson', json_encode($stats->getNodesOverTime(60)));
   fclose($fh);
 }
 
