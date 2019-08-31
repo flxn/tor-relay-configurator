@@ -27,7 +27,7 @@
               </tr>
               <tr>
                 <td><a href="https://m.do.co/c/7a1a3669128b">Digital Ocean</a></td>
-                <td>Multiple (US, UK, FR, NL, ...)</td>
+                <td>US, UK, FR, NL, ...</td>
                 <td>yes</td>
                 <td>no</td>
                 <td><a href="https://m.do.co/c/7a1a3669128b">View Page</a></td>
@@ -36,7 +36,7 @@
                 <td><a href="https://panel.linevast.de/aff.php?aff=416">Linevast</a></td>
                 <td>DE</td>
                 <td>yes</td>
-                <td>yes</td>
+                <td>no</td>
                 <td><a href="https://panel.linevast.de/aff.php?aff=416">View Page</a></td>
               </tr>
               <tr>
@@ -46,9 +46,17 @@
                 <td>no</td>
                 <td><a href="https://www.yourserver.se/portal/aff.php?aff=329">View Page</a></td>
               </tr>
+              <tr>
+                <td><a href="https://koddos.net/clients/aff.php?aff=636">KoDDos</a></td>
+                <td>NL, HKG</td>
+                <td>yes</td>
+                <td>yes</td>
+                <td><a href="https://koddos.net/clients/aff.php?aff=636">View Page</a></td>
+              </tr>
             </tbody>
           </table>
           <i>The links in the table above are affiliate links. If you want to support this page you can purchase a product through one of these links and I will get a small percentage of your sale value. 100% of the money will be used for maintenance of this site and my own Tor relays.</i>
+          <i>Please read the Terms of Service of the providers before signing up. Even if they allowed it in the past I do not take any responsibility if they close your account for deploying Tor.</i>
           <br> You can find a comprehensive list of Tor-friendly companies on the <a href="https://trac.torproject.org/projects/tor/wiki/doc/GoodBadISPs" target="_blank">official Tor wiki</a>.
          </p>
          <h3>Sudo</h3>
