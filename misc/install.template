@@ -24,7 +24,7 @@ echo "Updating package list..."
 sudo apt-get -y update > /dev/null
 
 echo "Installing necessary packages..."
-sudo apt-get -y install apt-transport-https psmisc dirmngr ntpdate python-pip> /dev/null
+sudo apt-get -y install apt-transport-https psmisc dirmngr ntpdate curl > /dev/null
 
 echo "Updating NTP..."
 sudo ntpdate pool.ntp.org > /dev/null
@@ -35,8 +35,8 @@ echo "deb https://deb.torproject.org/torproject.org $RELEASE main" | sudo tee /e
 echo "deb-src https://deb.torproject.org/torproject.org $RELEASE main" | sudo tee --append /etc/apt/sources.list.d/tor.list > /dev/null
 
 echo "Adding Torproject GPG key..."
-gpg --keyserver keys.gnupg.net --recv A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 > /dev/null
-gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add - > /dev/null
+curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import > /dev/null
+gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | apt-key add - > /dev/null
 
 echo "Updating package list..."
 sudo apt-get -y update > /dev/null
