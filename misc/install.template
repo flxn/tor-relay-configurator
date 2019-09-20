@@ -44,7 +44,7 @@ sudo apt-get -y update > /dev/null
 if $INSTALL_ARM
 then
   echo "Installing Nyx..."
-  sudo pip install nyx > /dev/null
+  sudo apt-get -y install nyx > /dev/null
 fi
 
 echo "Installing Tor..."
