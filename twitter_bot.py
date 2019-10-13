@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import sqlite3
 import tweepy
 import os
@@ -11,12 +12,12 @@ if os.path.exists(os.path.join(os.path.dirname(__file__), DB_FILE_NAME)):
     c = conn.cursor()
 
     c.execute("""
-    SELECT measured, count(*) 
+    SELECT measured, count(*)
     FROM (
         SELECT node, measured FROM stats GROUP BY node, strftime('%Y-%m-%d',measured)
     )
     GROUP BY strftime('%Y-%m-%d',measured)
-    ORDER BY strftime('%Y-%m-%d',measured) DESC 
+    ORDER BY strftime('%Y-%m-%d',measured) DESC
     LIMIT 8
     """)
 
@@ -29,12 +30,12 @@ if os.path.exists(os.path.join(os.path.dirname(__file__), DB_FILE_NAME)):
             nodes_last_week = row[1]
 
     c.execute("""
-    SELECT datetime(measured), sum(bw) 
+    SELECT datetime(measured), sum(bw)
     FROM (
         SELECT min(average_bandwidth, burst_bandwidth, observed_bandwidth) as bw, measured FROM stats
-    ) 
-    GROUP BY strftime('%Y-%m-%d %H',measured) 
-    ORDER BY strftime('%Y-%m-%d %H',measured) DESC 
+    )
+    GROUP BY strftime('%Y-%m-%d %H',measured)
+    ORDER BY strftime('%Y-%m-%d %H',measured) DESC
     LIMIT 8
     """)
 
@@ -45,17 +46,17 @@ if os.path.exists(os.path.join(os.path.dirname(__file__), DB_FILE_NAME)):
             bandwidth_today = row[1] * 8 / 1000 / 1000
         if i == 7:
             bandwidth_last_week = row[1] * 8 / 1000 / 1000
-        
+
     icon_up = "↗️"
     icon_down = "↘️"
     status_msg = "📊 Tor-Relay.co Weekly Stats\n{} {} nodes ({} last week)\n{} {:.0f} Mbit/s ({:.0f} last week)".format(
         icon_up if nodes_today >= nodes_last_week else icon_down,
-        nodes_today, 
-        nodes_last_week, 
+        nodes_today,
+        nodes_last_week,
         icon_up if bandwidth_today >= bandwidth_last_week else icon_down,
-        bandwidth_today, 
+        bandwidth_today,
         bandwidth_last_week)
-    
+
     print(status_msg)
 
     conn.close()
