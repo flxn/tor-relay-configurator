@@ -194,8 +194,8 @@
             </div>
 
             <label class="u-full-width">
-              <input type="checkbox" name="enable-arm">
-              <span class="label-body">Enable monitoring through <a href="https://www.atagar.com/arm/" target="_blank">arm</a></span>
+              <input type="checkbox" name="enable-nyx">
+              <span class="label-body">Enable monitoring through <a href="https://nyx.torproject.org/" target="_blank">nyx</a></span>
             </label>
 
           <input id="submit" type="submit" class="button-primary u-pull-right" name="submit" value="submit">

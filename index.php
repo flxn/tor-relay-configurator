@@ -64,7 +64,7 @@ Flight::route('POST /', function () {
       $template = file_get_contents('misc/install.template');
       $template = str_replace('%RELEASE%', escapeshellcmd($req->data['os']), $template);
       $template = str_replace('%TORRC%', $torrc, $template);
-      $template = str_replace('%ARM%', isset($req->data['enable-arm']) ? 'true' : 'false', $template);
+      $template = str_replace('%NYX%', isset($req->data['enable-nyx']) ? 'true' : 'false', $template);
       $template = str_replace('%EXIT%', ($req->data['node-type'] == 'exit') ? 'true' : 'false', $template);
       $template = str_replace('%CHECKIPV6%', isset($req->data['ipv6']) ? 'true' : 'false', $template);
       $template = str_replace('%ENABLE_AUTO_UPDATE%', isset($req->data['unattended-upgrades']) ? 'true' : 'false', $template);
@@ -79,7 +79,7 @@ Flight::route('POST /', function () {
       Flight::render('installation', array(
         'torrc' => $torrc,
         'configFile' => $scriptFile,
-        'arm' => isset($req->data['enable-arm']),
+        'nyx' => isset($req->data['enable-nyx']),
       ), 'main_content');
   } catch (Exception $e) {
       Flight::render('main', array('errors' => $e->getMessage()), 'main_content');

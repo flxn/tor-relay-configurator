@@ -1,6 +1,6 @@
 RELEASE='%RELEASE%'
 IS_EXIT=%EXIT%
-INSTALL_ARM=%ARM%
+INSTALL_NYX=%NYX%
 CHECK_IPV6=%CHECKIPV6%
 ENABLE_AUTO_UPDATE=%ENABLE_AUTO_UPDATE%
 
@@ -41,10 +41,10 @@ gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add - > /de
 echo "Updating package list..."
 sudo apt-get -y update > /dev/null
 
-if $INSTALL_ARM
+if $INSTALL_NYX
 then
-  echo "Installing ARM..."
-  sudo apt-get -y install tor-arm > /dev/null
+  echo "Installing NYX..."
+  sudo apt-get -y install nyx > /dev/null
 fi
 
 echo "Installing Tor..."

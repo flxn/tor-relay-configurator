@@ -91,7 +91,7 @@ class TorConfig
             $baseConfig["AccountingMax"] = floor($limit / 2).' GB';
         }
 
-        if (isset($variables['enable-arm'])) {
+        if (isset($variables['enable-nyx'])) {
             $baseConfig["DisableDebuggerAttachment"] = 0;
             $baseConfig["ControlPort"] = 9051;
             $baseConfig["CookieAuthentication"] = 1;
