@@ -19,13 +19,6 @@
             </thead>
             <tbody>
               <tr>
-                <td><a href="http://partners.webmasterplan.com/click.asp?ref=750458&site=4208&type=text&tnb=31">Contabo</a></td>
-                <td>DE</td>
-                <td>yes</td>
-                <td>yes</td>
-                <td><a href="http://partners.webmasterplan.com/click.asp?ref=750458&site=4208&type=text&tnb=31">View Page</a></td>
-              </tr>
-              <tr>
                 <td><a href="https://m.do.co/c/7a1a3669128b">Digital Ocean</a></td>
                 <td>US, UK, FR, NL, ...</td>
                 <td>yes</td>
