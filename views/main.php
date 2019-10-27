@@ -70,8 +70,8 @@
           <label>Operating System*<sup>1</sup> (Currently Ubuntu and Debian only. More options in the future)</label>
           <select name="os" id="os-select">
             <option value="jessie">Debian oldstable (jessie)</option>
-            <option value="stretch" selected="selected">Debian stable (stretch)</option>
-            <option value="buster">Debian testing (buster)</option>
+            <option value="stretch" selected="selected">Debian 9 (stretch)</option>
+            <option value="buster">Debian 10 (buster)</option>
             <option value="sid">Debian unstable (sid)</option>
             <option value="trusty">Ubuntu Trusty Tahr (14.04 LTS)</option>
             <option value="xenial">Ubuntu Xenial Xerus (16.04 LTS)</option>
