@@ -49,7 +49,7 @@ if os.path.exists(os.path.join(os.path.dirname(__file__), DB_FILE_NAME)):
 
     icon_up = "↗️"
     icon_down = "↘️"
-    status_msg = "📊 Tor-Relay.co Weekly Stats\n{} {} nodes ({} last week)\n{} {:.0f} Mbit/s ({:.0f} last week)".format(
+    status_msg = "📊 Tor-Relay.co Weekly Stats\n{} {} nodes ({} last week)\n{} {:.0f} Mbit/s ({:.0f} last week)\nBecome a part: https://tor-relay.co/ \n#Tor #SupportTor".format(
         icon_up if nodes_today >= nodes_last_week else icon_down,
         nodes_today,
         nodes_last_week,
