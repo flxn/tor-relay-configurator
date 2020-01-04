@@ -14,37 +14,58 @@
                 <th>Server Location</th>
                 <th>Middle Node (Relay)</th>
                 <th>Exit Node</th>
+                <th>Bitcoin</th>
                 <th>Link</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><a href="https://m.do.co/c/7a1a3669128b">Digital Ocean</a></td>
-                <td>US, UK, FR, NL, ...</td>
+                <td><a href="https://panel.linevast.de/aff.php?aff=416" target="_blank">Linevast</a></td>
+                <td>Germany</td>
                 <td>yes</td>
                 <td>no</td>
-                <td><a href="https://m.do.co/c/7a1a3669128b">View Page</a></td>
+                <td>yes</td>
+                <td><a href="https://panel.linevast.de/aff.php?aff=416" target="_blank">View Page</a></td>
               </tr>
               <tr>
-                <td><a href="https://panel.linevast.de/aff.php?aff=416">Linevast</a></td>
-                <td>DE</td>
+                <td><a href="https://billing.flokinet.is/aff.php?aff=226" target="_blank">Flokinet</a></td>
+                <td>Romania, Iceland, Finland</td>
+                <td>yes</td>
+                <td>yes</td>
+                <td>yes</td>
+                <td><a href="https://billing.flokinet.is/aff.php?aff=226" target="_blank">View Page</a></td>
+              </tr>
+              <tr>
+                <td><a href="https://www.yourserver.se/portal/aff.php?aff=329" target="_blank">Yourserver</a></td>
+                <td>Sweden, Latvia</td>
                 <td>yes</td>
                 <td>no</td>
-                <td><a href="https://panel.linevast.de/aff.php?aff=416">View Page</a></td>
+                <td>yes</td>
+                <td><a href="https://www.yourserver.se/portal/aff.php?aff=329" target="_blank">View Page</a></td>
               </tr>
               <tr>
-                <td><a href="https://www.yourserver.se/portal/aff.php?aff=329">Yourserver</a></td>
-                <td>SWE, LVA</td>
+                <td><a href="https://www.pulseservers.com/billing/aff.php?aff=75" target="_blank">PulseServers</a></td>
+                <td>Canada, United Kingdom</td>
                 <td>yes</td>
+                <td>yes</td>
+                <td>yes</td>
+                <td><a href="https://www.pulseservers.com/billing/aff.php?aff=75" target="_blank">View Page</a></td>
+              </tr>
+              <tr>
+                <td><a href="https://my.frantech.ca/aff.php?aff=3372" target="_blank">BuyVM (Frantech)</a></td>
+                <td>United States, Luxembourg</td>
+                <td>yes</td>
+                <td><a href="https://buyvm.net/acceptable-use-policy/#3" target="_blank">yes</a></td>
                 <td>no</td>
-                <td><a href="https://www.yourserver.se/portal/aff.php?aff=329">View Page</a></td>
+                <td><a href="https://my.frantech.ca/aff.php?aff=3372" target="_blank">View Page</a></td>
               </tr>
               <tr>
-                <td><a href="https://koddos.net/clients/aff.php?aff=636">KoDDos</a></td>
-                <td>NL, HKG</td>
+                <td><a href="https://koddos.net/clients/aff.php?aff=636" target="_blank">KoDDos</a></td>
+                <td>Netherlands, Hong Kong</td>
                 <td>yes</td>
                 <td>yes</td>
-                <td><a href="https://koddos.net/clients/aff.php?aff=636">View Page</a></td>
+                <td>yes</td>
+                <td><a href="https://koddos.net/clients/aff.php?aff=636" target="_blank">View Page</a></td>
               </tr>
             </tbody>
           </table>
