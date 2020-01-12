@@ -23,6 +23,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/shariff.complete.css">
   <link rel="stylesheet" href="css/style.css">
 
   <!-- Favicon
@@ -92,20 +93,19 @@
       <div class="row">
         <div class="twelve columns">
           <div class="row footer">
-            If you have a problem/question/suggestion email me at <b>mail [at] flxn [dot] de</b> | <a href="https://flxn.de">More of my stuff</a>
+            If you have a problem/question/suggestion email me at <b>mail [at] flxn [dot] de</b> 
+            | <a href="https://flxn.de">More of my stuff</a> 
+            | <a href="https://github.com/flxn/tor-relay-configurator" rel="nofollow" role="button" aria-label="flxn/tor-relay-configurator">
+                    <span class="fab fa-github"></span>
+                    <span class="share_text">View this project on GitHub</span>
+                  </a>
           </div>
           <div class="row">
             <a href="https://ko-fi.com/flxn256" target="_blank">💵☕️ Buy me a coffee... or a tea, or a Club Mate (I actually don't like coffee)</a> | Website currently at commit: <a href="https://github.com/flxn/tor-relay-configurator/commit/<?=$currentCommit?>"><?=$currentCommit?></a>
           </div>
           <div class="row footer2">
-            <div class="six columns offset-by-three">
-              <div class="six columns">
-                <!-- Place this tag where you want the button to render. -->
-                <a class="github-button" href="https://github.com/flxn/tor-relay-configurator" data-style="mega" aria-label="flxn/tor-relay-configurator">View on GitHub</a>
-              </div>
-              <div class="six columns">
-                <a href="https://twitter.com/torrelayco" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @torrelayco</a>
-              </div>
+            <div class="twelve columns">
+                <div class="shariff" data-lang="en" data-title="Set up your own Tor node and contribute to privacy on the internet." data-theme="white" data-orientation="horizontal" data-twitter-via="torrelayco" data-services="['twitter', 'facebook', 'threema', 'telegram', 'whatsapp', 'mail']"></div>
             </div>
           </div>
         </div>
@@ -116,24 +116,12 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/moment.min.js"></script>
     <script src="js/Chart.min.js"></script>
+    <script src="js/shariff.min.js"></script>
     <script>
       var bandwidthChartData = <?=$bandwidthChartData?>;
       var nodesChartData = <?=$nodesChartData?>;
     </script>
     <script src="js/main.js"></script>
-    <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
-    <script>
-      ! function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0],
-          p = /^http:/.test(d.location) ? 'http' : 'https';
-        if (!d.getElementById(id)) {
-          js = d.createElement(s);
-          js.id = id;
-          js.src = p + '://platform.twitter.com/widgets.js';
-          fjs.parentNode.insertBefore(js, fjs);
-        }
-      }(document, 'script', 'twitter-wjs');
-    </script>
     <!-- Matomo -->
     <script type="text/javascript">
       var _paq = _paq || [];

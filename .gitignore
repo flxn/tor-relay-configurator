@@ -6,3 +6,4 @@ misc/nodes.txt
 .vscode/
 *.db
 .env
+.DS_Store

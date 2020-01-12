@@ -1,11 +1,10 @@
   <!-- Primary Page Layout -->
-  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
   <div class="container">
     <div class="row">
       <div class="twelve columns">
         <div class="row">
           <div class="twelve columns">
-            <h2>2) Installation <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="https://tor-relay.co" data-text="I'm now operating my own Tor Relay. Set up yours today!" data-via="torrelayco" data-size="large" data-hashtags="SupportTor">Share</a></h2>
+            <h2>2) Installation</h2>
             <p>
               Run the following command to set up your Tor relay:<br>
               <i>Only run this script if your hoster/ISP allows Tor!</i>
@@ -23,6 +22,9 @@
             <?php endif; ?>
             <h3>Torrc Preview</h3>
             <pre><code><?php echo htmlspecialchars($torrc, ENT_QUOTES, 'UTF-8'); ?></code></pre>
+            <h4>2.1) Spread the word</h3>
+            <p>Share your contribution with your friends to help make the Tor network even bigger.</p>
+            <div class="shariff" data-lang="en" data-title="I am now running my own Tor node. Set up your own:" data-theme="white" data-orientation="horizontal" data-twitter-via="torrelayco" data-services="['twitter', 'facebook', 'threema', 'telegram', 'whatsapp', 'mail']"></div>
           </div>
         </div>
         <div class="row">
