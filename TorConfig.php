@@ -54,8 +54,15 @@ class TorConfig
           $baseConfig = array(
             "ORPort" => $variables['orport'],
             "SocksPort" => 0,
-            "BridgeRelay" => 1
+            "BridgeRelay" => 1,
+            "ServerTransportPlugin" => "obfs4 exec /usr/bin/obfs4proxy",
+            "ServerTransportListenAddr" => "obfs4 0.0.0.0:".$variables['obfs4port'],
+            "ExtOrPort" => "auto"
           );
+
+          if (isset($variables['ipv6'])) {
+            $baseConfig["ServerTransportListenAddr"] = array($baseConfig["ServerTransportListenAddr"], "[::]:".$variables["obfs4port"]);
+          }
         }
 
         $baseConfig["Log"] = "notice file /var/log/tor/notices.log";

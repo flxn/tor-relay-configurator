@@ -182,6 +182,13 @@
                   <input type="text" name="dirport" class="u-full-width" value="9030" id="dirport">
                 </div>
               </div>
+
+              <div class="six columns">
+                <div id="field-obfs4port">
+                  <label for="obfs4port">Obfs4 Port*</label>
+                  <input type="text" name="obfs4port" class="u-full-width" value="9030" id="obfs4port">
+                </div>
+              </div>
             </div>
 
             <label for="traffic-total">Total (Up + Down) monthly traffic limit (empty for no limit)</label>

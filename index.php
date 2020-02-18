@@ -66,6 +66,7 @@ Flight::route('POST /', function () {
       $template = str_replace('%TORRC%', $torrc, $template);
       $template = str_replace('%NYX%', isset($req->data['enable-nyx']) ? 'true' : 'false', $template);
       $template = str_replace('%EXIT%', ($req->data['node-type'] == 'exit') ? 'true' : 'false', $template);
+      $template = str_replace('%BRIDGE%', ($req->data['node-type'] == 'bridge') ? 'true' : 'false', $template);
       $template = str_replace('%CHECKIPV6%', isset($req->data['ipv6']) ? 'true' : 'false', $template);
       $template = str_replace('%ENABLE_AUTO_UPDATE%', isset($req->data['unattended-upgrades']) ? 'true' : 'false', $template);
 

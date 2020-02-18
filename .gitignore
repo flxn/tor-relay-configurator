@@ -7,3 +7,4 @@ misc/nodes.txt
 *.db
 .env
 .DS_Store
+composer.phar

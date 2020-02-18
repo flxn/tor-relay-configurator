@@ -1,5 +1,6 @@
 RELEASE='%RELEASE%'
 IS_EXIT=%EXIT%
+IS_BRIDGE=%BRIDGE%
 INSTALL_NYX=%NYX%
 CHECK_IPV6=%CHECKIPV6%
 ENABLE_AUTO_UPDATE=%ENABLE_AUTO_UPDATE%
@@ -50,6 +51,13 @@ fi
 echo "Installing Tor..."
 sudo apt-get -y install tor deb.torproject.org-keyring > /dev/null
 sudo chown -R debian-tor:debian-tor /var/log/tor
+
+if $IS_BRIDGE
+then
+  echo "Installing obfs4proxy..."
+  sudo apt-get -y install obfs4proxy > /dev/null
+  systemctl daemon-reload
+fi
 
 echo "Setting Tor config..."
 cat << 'EOF' | sudo tee /etc/tor/torrc > /dev/null

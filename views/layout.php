@@ -78,9 +78,11 @@
             <div class="topnodes">
                 <strong>Top 5 Nodes</strong>
                 <ul>
+                  <?php if (count($nodes) >= 5){ ?>
                     <?php for($i = 0; $i < 5; $i++){ ?>
                         <li><?=$nodes[$i]['name']?> (<?=$nodes[$i]['bandwidth']?>Mb/s)</li>
                     <?php } ?>
+                  <?php } ?>
                 </ul>
             </div>
         </div>
