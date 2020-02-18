@@ -4,7 +4,24 @@ INSTALL_NYX=%NYX%
 CHECK_IPV6=%CHECKIPV6%
 ENABLE_AUTO_UPDATE=%ENABLE_AUTO_UPDATE%
 
-echo -e "\e[36m" #cyan
+C_RED="\e[31m"
+C_GREEN="\e[32m"
+C_CYAN="\e[36m"
+C_DEFAULT="\e[39m"
+
+function echoInfo() {
+  echo "${C_CYAN}$1${C_DEFAULT}"
+}
+
+function echoError() {
+  echo "${C_RED}$1${C_DEFAULT}"
+}
+
+function echoSuccess() {
+  echo "${C_GREEN}$1${C_DEFAULT}"
+}
+
+echo -e $C_CYAN #cyan
 cat << "EOF"
 
  _____            ___     _
@@ -15,50 +32,50 @@ cat << "EOF"
 
 EOF
 
-echo -e "\e[39m" #default
+echo -e $C_DEFAULT #default
 echo "              [Relay Setup]"
 echo "This script will ask for your sudo password."
 echo "----------------------------------------------------------------------"
 
-echo "Updating package list..."
+echoInfo "Updating package list..."
 sudo apt-get -y update > /dev/null
 
-echo "Installing necessary packages..."
+echoInfo "Installing necessary packages..."
 sudo apt-get -y install apt-transport-https psmisc dirmngr ntpdate curl > /dev/null
 
-echo "Updating NTP..."
+echoInfo "Updating NTP..."
 sudo ntpdate pool.ntp.org > /dev/null
 
-echo "Adding Torproject apt repository..."
+echoInfo "Adding Torproject apt repository..."
 sudo touch /etc/apt/sources.list.d/tor.list
 echo "deb https://deb.torproject.org/torproject.org $RELEASE main" | sudo tee /etc/apt/sources.list.d/tor.list > /dev/null
 echo "deb-src https://deb.torproject.org/torproject.org $RELEASE main" | sudo tee --append /etc/apt/sources.list.d/tor.list > /dev/null
 
-echo "Adding Torproject GPG key..."
+echoInfo "Adding Torproject GPG key..."
 curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import > /dev/null
 gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add - > /dev/null
 
-echo "Updating package list..."
+echoInfo "Updating package list..."
 sudo apt-get -y update > /dev/null
 
 if $INSTALL_NYX
 then
-  echo "Installing NYX..."
+  echoInfo "Installing NYX..."
   sudo apt-get -y install nyx > /dev/null
 fi
 
-echo "Installing Tor..."
+echoInfo "Installing Tor..."
 sudo apt-get -y install tor deb.torproject.org-keyring > /dev/null
 sudo chown -R debian-tor:debian-tor /var/log/tor
 
-echo "Setting Tor config..."
+echoInfo "Setting Tor config..."
 cat << 'EOF' | sudo tee /etc/tor/torrc > /dev/null
 %TORRC%
 EOF
 
 if $IS_EXIT
 then
-  echo "Downloading Exit Notice to /etc/tor/tor-exit-notice.html..."
+  echoInfo "Downloading Exit Notice to /etc/tor/tor-exit-notice.html..."
   echo -e "\e[1mPlease edit this file and replace FIXME_YOUR_EMAIL_ADDRESS with your e-mail address!"
   echo -e "\e[1mAlso note that this is the US version. If you are not in the US please edit the file and remove the US-Only sections!\e[0m"
   sudo wget -q -O /etc/tor/tor-exit-notice.html "https://raw.githubusercontent.com/flxn/tor-relay-configurator/master/misc/tor-exit-notice.html"
@@ -66,26 +83,37 @@ fi
 
 if $CHECK_IPV6
 then
+  echoInfo "Testing IPV6..."
+  IPV6_GOOD=false
+  ping6 -c2 2001:858:2:2:aabb:0:563b:1526 && ping6 -c2 2620:13:4000:6000::1000:118 && ping6 -c2 2001:67c:289c::9 && ping6 -c2 2001:678:558:1000::244 && ping6 -c2 2607:8500:154::3 && ping6 -c2 2001:638:a000:4140::ffff:189 && IPV6_GOOD=true
+  if [ ! IPV6_GOOD ]
+  then
+    sudo /etc/init.d/tor stop
+    echoError "Could not reach Tor directory servers via IPV6"
+    sudo sed -i -e '/INSERT_IPV6_ADDRESS/d' /etc/tor/torrc
+    sudo sed -i -e 's/IPv6Exit 1/IPv6Exit 0/' /etc/tor/torrc
+    echoError "IPv6 support has been disabled!"
+  else
+    echoSuccess "Seems like your IPV6 connection is working"
+  fi
+
   IPV6_ADDRESS=$(ip -6 addr | grep inet6 | grep "scope global" | awk '{print $2}' | cut -d'/' -f1)
   if [ -z "$IPV6_ADDRESS" ]
   then
     sudo /etc/init.d/tor stop
-    echo -e "\e[31mCould not automatically find your IPv6 address"
+    echoError "Could not automatically find your IPv6 address"
     sudo sed -i -e '/INSERT_IPV6_ADDRESS/d' /etc/tor/torrc
     sudo sed -i -e 's/IPv6Exit 1/IPv6Exit 0/' /etc/tor/torrc
-    echo -e "\e[31mIPv6 support has been disabled\e[39m"
-    echo "If you want to enable it manually find out your IPv6 address and add this line to your /etc/tor/torrc"
-    echo "ORPort [YOUR_IPV6_ADDRESS]:YOUR_ORPORT (example: \"ORPort [2001:123:4567:89ab::1]:9001\")"
-    echo "Then run \"sudo /etc/init.d/tor restart\" to rstart Tor"
+    echoError "IPv6 support has been disabled!"
   else
     sudo sed -i "s/INSERT_IPV6_ADDRESS/$IPV6_ADDRESS/" /etc/tor/torrc
-    echo -e "\e[32mIPv6 Support enabled ($IPV6_ADDRESS)\e[39m"
+    echoSuccess "IPv6 Support enabled ($IPV6_ADDRESS)"
   fi
 fi
 
 if $ENABLE_AUTO_UPDATE
 then
-  echo "Enabling unattended upgrades..."
+  echoInfo "Enabling unattended upgrades..."
   sudo apt-get install -y unattended-upgrades apt-listchanges
   DISTRO=$(lsb_release -is)
   sudo wget -q -O /etc/apt/apt.conf.d/50unattended-upgrades "https://raw.githubusercontent.com/flxn/tor-relay-configurator/master/misc/50unattended-upgrades.$DISTRO"
@@ -93,10 +121,10 @@ fi
 
 sleep 10
 
-echo "Reloading Tor config..."
+echoInfo "Reloading Tor config..."
 sudo /etc/init.d/tor restart
 
-echo -e "\e[32mSetup finished\e[39m"
+echoSuccess "Setup finished"
 echo "----------------------------------------------------------------------"
 echo "Tor will now check if your ports are reachable. This may take up to 20 minutes."
 echo "Check /var/log/tor/notices.log for an entry like:"
