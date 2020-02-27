@@ -12,15 +12,22 @@ C_CYAN="\e[36m"
 C_DEFAULT="\e[39m"
 
 function echoInfo() {
-  echo "${C_CYAN}$1${C_DEFAULT}"
+  echo -e "${C_CYAN}$1${C_DEFAULT}"
 }
 
 function echoError() {
-  echo "${C_RED}$1${C_DEFAULT}"
+  echo -e "${C_RED}$1${C_DEFAULT}"
 }
 
 function echoSuccess() {
-  echo "${C_GREEN}$1${C_DEFAULT}"
+  echo -e "${C_GREEN}$1${C_DEFAULT}"
+}
+
+function handleError() {
+  echoError "-> ERROR"
+  sudo /etc/init.d/tor restart
+  echoError "An error occured on the last setup step."
+  echoError "If you think there is a problem with this script you can share your system information for debugging: tor@flxn.de"
 }
 
 echo -e $C_CYAN #cyan
@@ -40,53 +47,53 @@ echo "This script will ask for your sudo password."
 echo "----------------------------------------------------------------------"
 
 echoInfo "Updating package list..."
-sudo apt-get -y update > /dev/null
+sudo apt-get -y update > /dev/null && echoSuccess "-> OK" || handleError
 
 echoInfo "Installing necessary packages..."
-sudo apt-get -y install apt-transport-https psmisc dirmngr ntpdate curl > /dev/null
+sudo apt-get -y install apt-transport-https psmisc dirmngr ntpdate curl > /dev/null && echoSuccess "-> OK" || handleError
 
 echoInfo "Updating NTP..."
-sudo ntpdate pool.ntp.org > /dev/null
+sudo ntpdate pool.ntp.org > /dev/null && echoSuccess "-> OK" || handleError
 
 echoInfo "Adding Torproject apt repository..."
-sudo touch /etc/apt/sources.list.d/tor.list
-echo "deb https://deb.torproject.org/torproject.org $RELEASE main" | sudo tee /etc/apt/sources.list.d/tor.list > /dev/null
-echo "deb-src https://deb.torproject.org/torproject.org $RELEASE main" | sudo tee --append /etc/apt/sources.list.d/tor.list > /dev/null
+sudo touch /etc/apt/sources.list.d/tor.list && echoSuccess "-> touch OK" || handleError
+echo "deb https://deb.torproject.org/torproject.org $RELEASE main" | sudo tee /etc/apt/sources.list.d/tor.list > /dev/null && echoSuccess "-> tee1 OK" || handleError
+echo "deb-src https://deb.torproject.org/torproject.org $RELEASE main" | sudo tee --append /etc/apt/sources.list.d/tor.list > /dev/null && echoSuccess "-> tee2 OK" || handleError
 
 echoInfo "Adding Torproject GPG key..."
-curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import > /dev/null
-gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add - > /dev/null
+curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import > /dev/null && echoSuccess "-> gpg import OK" || handleError
+gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add - && echoSuccess "-> key-add OK" || handleError
 
 echoInfo "Updating package list..."
-sudo apt-get -y update > /dev/null
+sudo apt-get -y update > /dev/null && echoSuccess "-> OK" || handleError
 
 if $INSTALL_NYX
 then
   echoInfo "Installing NYX..."
-  sudo apt-get -y install nyx > /dev/null
+  sudo apt-get -y install nyx > /dev/null && echoSuccess "-> OK" || echoError "-> Error but continuing anyway...\nVisit nyx website for installation instructions: https://nyx.torproject.org/"
 fi
 
 echoInfo "Installing Tor..."
-sudo apt-get -y install tor deb.torproject.org-keyring > /dev/null
-sudo chown -R debian-tor:debian-tor /var/log/tor
+sudo apt-get -y install tor deb.torproject.org-keyring > /dev/null && echoSuccess "-> install OK" || handleError
+sudo chown -R debian-tor:debian-tor /var/log/tor && echoSuccess "-> chown OK" || handleError
 
 if $IS_BRIDGE
 then
   echoInfo "Installing obfs4proxy..."
-  sudo apt-get -y install obfs4proxy > /dev/null
+  sudo apt-get -y install obfs4proxy > /dev/null && echoSuccess "-> OK" || handleError
 
   if $OBFS4PORT_LT_1024
   then
-    echo "obfs4port lower than 1024 -> setting net_bind_service capability for non-root user"
-    sudo setcap cap_net_bind_service=+ep /usr/bin/obfs4proxy
+    echoInfo "Setting net_bind_service capability for non-root user"
+    sudo setcap cap_net_bind_service=+ep /usr/bin/obfs4proxy && echoSuccess "-> OK" || handleError
   fi
 
-  sudo sed -i -e 's/NoNewPrivileges=yes/NoNewPrivileges=no/' /lib/systemd/system/tor@default.service
-  systemctl daemon-reload
+  sudo sed -i -e 's/NoNewPrivileges=yes/NoNewPrivileges=no/' /lib/systemd/system/tor@default.service && echoSuccess "-> sed OK" || handleError
+  systemctl daemon-reload && echoSuccess "-> daemon-reload OK" || handleError
 fi
 
 echoInfo "Setting Tor config..."
-cat << 'EOF' | sudo tee /etc/tor/torrc > /dev/null
+cat << 'EOF' | sudo tee /etc/tor/torrc > /dev/null && echoSuccess "-> OK" || handleError
 %TORRC%
 EOF
 
@@ -95,7 +102,7 @@ then
   echoInfo "Downloading Exit Notice to /etc/tor/tor-exit-notice.html..."
   echo -e "\e[1mPlease edit this file and replace FIXME_YOUR_EMAIL_ADDRESS with your e-mail address!"
   echo -e "\e[1mAlso note that this is the US version. If you are not in the US please edit the file and remove the US-Only sections!\e[0m"
-  sudo wget -q -O /etc/tor/tor-exit-notice.html "https://raw.githubusercontent.com/flxn/tor-relay-configurator/master/misc/tor-exit-notice.html"
+  sudo wget -q -O /etc/tor/tor-exit-notice.html "https://raw.githubusercontent.com/flxn/tor-relay-configurator/master/misc/tor-exit-notice.html" && echoSuccess "-> OK" || handleError
 fi
 
 function disableIPV6() {
@@ -138,9 +145,9 @@ fi
 if $ENABLE_AUTO_UPDATE
 then
   echoInfo "Enabling unattended upgrades..."
-  sudo apt-get install -y unattended-upgrades apt-listchanges > /dev/null
+  sudo apt-get install -y unattended-upgrades apt-listchanges > /dev/null && echoSuccess "-> install OK" || handleError
   DISTRO=$(lsb_release -is)
-  sudo wget -q -O /etc/apt/apt.conf.d/50unattended-upgrades "https://raw.githubusercontent.com/flxn/tor-relay-configurator/master/misc/50unattended-upgrades.$DISTRO"
+  sudo wget -q -O /etc/apt/apt.conf.d/50unattended-upgrades "https://raw.githubusercontent.com/flxn/tor-relay-configurator/master/misc/50unattended-upgrades.$DISTRO" && echoSuccess "-> wget OK" || handleError
 fi
 
 sleep 10
@@ -148,9 +155,20 @@ sleep 10
 echoInfo "Reloading Tor config..."
 sudo /etc/init.d/tor restart
 
-echoSuccess "Setup finished"
-echo "----------------------------------------------------------------------"
+echo ""
+echoSuccess "=> Setup finished"
+echo ""
 echo "Tor will now check if your ports are reachable. This may take up to 20 minutes."
 echo "Check /var/log/tor/notices.log for an entry like:"
 echo "\"Self-testing indicates your ORPort is reachable from the outside. Excellent.\""
-echo "----------------------------------------------------------------------"
+echo ""
+
+sleep 5
+
+if [ ! -f /var/log/tor/notices.log ]; then
+  echoError "Could not find Tor logfile."
+  echo "This could indicate an error. Check syslog for error messages from Tor:"
+  echo "  /var/log/syslog | grep -i tor"
+  echo "It could also be a false positive. Wait a bit and check the log file again."
+  echo "If you chose to install nyx you can check nyx to see if Tor is running."
+fi
