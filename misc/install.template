@@ -4,6 +4,7 @@ IS_BRIDGE=%BRIDGE%
 INSTALL_NYX=%NYX%
 CHECK_IPV6=%CHECKIPV6%
 ENABLE_AUTO_UPDATE=%ENABLE_AUTO_UPDATE%
+OBFS4PORT_LT_1024=%OBFS4PORT_LT_1024%
 
 echo -e "\e[36m" #cyan
 cat << "EOF"
@@ -56,6 +57,14 @@ if $IS_BRIDGE
 then
   echo "Installing obfs4proxy..."
   sudo apt-get -y install obfs4proxy > /dev/null
+
+  if $OBFS4PORT_LT_1024
+  then
+    echo "obfs4port lower than 1024 -> setting net_bind_service capability for non-root user"
+    sudo setcap cap_net_bind_service=+ep /usr/bin/obfs4proxy
+  fi
+
+  sudo sed -i -e 's/NoNewPrivileges=yes/NoNewPrivileges=no/' /lib/systemd/system/tor@default.service
   systemctl daemon-reload
 fi
 
@@ -81,9 +90,11 @@ then
     echo -e "\e[31mCould not automatically find your IPv6 address"
     sudo sed -i -e '/INSERT_IPV6_ADDRESS/d' /etc/tor/torrc
     sudo sed -i -e 's/IPv6Exit 1/IPv6Exit 0/' /etc/tor/torrc
+    sudo sed -i -e '/\[..\]/d' /etc/tor/torrc
     echo -e "\e[31mIPv6 support has been disabled\e[39m"
     echo "If you want to enable it manually find out your IPv6 address and add this line to your /etc/tor/torrc"
     echo "ORPort [YOUR_IPV6_ADDRESS]:YOUR_ORPORT (example: \"ORPort [2001:123:4567:89ab::1]:9001\")"
+    echo "or for a bridge: ServerListenAddr obfs4 [..]:YOUR_OBFS4PORT"
     echo "Then run \"sudo /etc/init.d/tor restart\" to rstart Tor"
   else
     sudo sed -i "s/INSERT_IPV6_ADDRESS/$IPV6_ADDRESS/" /etc/tor/torrc

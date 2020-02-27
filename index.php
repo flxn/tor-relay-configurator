@@ -69,6 +69,7 @@ Flight::route('POST /', function () {
       $template = str_replace('%BRIDGE%', ($req->data['node-type'] == 'bridge') ? 'true' : 'false', $template);
       $template = str_replace('%CHECKIPV6%', isset($req->data['ipv6']) ? 'true' : 'false', $template);
       $template = str_replace('%ENABLE_AUTO_UPDATE%', isset($req->data['unattended-upgrades']) ? 'true' : 'false', $template);
+      $template = str_replace('%OBFS4PORT_LT_1024%', (isset($req->data['obfs4port']) && intval($req->data['obfs4port']) < 1024) ? 'true' : 'false', $template);
 
       // Write script to file
       if (!file_exists('userconfigs/')) {

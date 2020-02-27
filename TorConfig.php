@@ -61,7 +61,7 @@ class TorConfig
           );
 
           if (isset($variables['ipv6'])) {
-            $baseConfig["ServerTransportListenAddr"] = array($baseConfig["ServerTransportListenAddr"], "[::]:".$variables["obfs4port"]);
+            $baseConfig["ServerTransportListenAddr"] = array($baseConfig["ServerTransportListenAddr"], "obfs4 [::]:".$variables["obfs4port"]);
           }
         }
 
