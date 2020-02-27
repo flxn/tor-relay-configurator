@@ -132,9 +132,19 @@ then
     IPV6_ADDRESS=$(ip -6 addr | grep inet6 | grep "scope global" | awk '{print $2}' | cut -d'/' -f1)
     if [ -z "$IPV6_ADDRESS" ]
     then
-      sudo /etc/init.d/tor stop
       echoError "Could not automatically find your IPv6 address"
-      disableIPV6
+      echo "If you know your global (!) IPv6 address you can enter it now"
+      echo "Please make sure that you enter it correctly and do not enter any other characters"
+      echo "If you want to skip manual IPv6 setup leave the line blank and just press ENTER"
+      read -p "IPv6 address: " IPV6_ADDRESS
+
+      if [ -z "$IPV6_ADDRESS" ]
+      then
+        disableIPV6
+      else
+        sudo sed -i "s/INSERT_IPV6_ADDRESS/$IPV6_ADDRESS/" /etc/tor/torrc
+        echoSuccess "IPv6 Support enabled ($IPV6_ADDRESS)"
+      fi
     else
       sudo sed -i "s/INSERT_IPV6_ADDRESS/$IPV6_ADDRESS/" /etc/tor/torrc
       echoSuccess "IPv6 Support enabled ($IPV6_ADDRESS)"
