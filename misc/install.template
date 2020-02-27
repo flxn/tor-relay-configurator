@@ -1,8 +1,10 @@
 RELEASE='%RELEASE%'
 IS_EXIT=%EXIT%
+IS_BRIDGE=%BRIDGE%
 INSTALL_NYX=%NYX%
 CHECK_IPV6=%CHECKIPV6%
 ENABLE_AUTO_UPDATE=%ENABLE_AUTO_UPDATE%
+OBFS4PORT_LT_1024=%OBFS4PORT_LT_1024%
 
 C_RED="\e[31m"
 C_GREEN="\e[32m"
@@ -68,6 +70,21 @@ echoInfo "Installing Tor..."
 sudo apt-get -y install tor deb.torproject.org-keyring > /dev/null
 sudo chown -R debian-tor:debian-tor /var/log/tor
 
+if $IS_BRIDGE
+then
+  echoInfo "Installing obfs4proxy..."
+  sudo apt-get -y install obfs4proxy > /dev/null
+
+  if $OBFS4PORT_LT_1024
+  then
+    echo "obfs4port lower than 1024 -> setting net_bind_service capability for non-root user"
+    sudo setcap cap_net_bind_service=+ep /usr/bin/obfs4proxy
+  fi
+
+  sudo sed -i -e 's/NoNewPrivileges=yes/NoNewPrivileges=no/' /lib/systemd/system/tor@default.service
+  systemctl daemon-reload
+fi
+
 echoInfo "Setting Tor config..."
 cat << 'EOF' | sudo tee /etc/tor/torrc > /dev/null
 %TORRC%
@@ -81,6 +98,17 @@ then
   sudo wget -q -O /etc/tor/tor-exit-notice.html "https://raw.githubusercontent.com/flxn/tor-relay-configurator/master/misc/tor-exit-notice.html"
 fi
 
+function disableIPV6() {
+  sudo sed -i -e '/INSERT_IPV6_ADDRESS/d' /etc/tor/torrc
+  sudo sed -i -e 's/IPv6Exit 1/IPv6Exit 0/' /etc/tor/torrc
+  sudo sed -i -e '/\[..\]/d' /etc/tor/torrc
+  echoError "IPv6 support has been disabled!"
+  echo "If you want to enable it manually find out your IPv6 address and add this line to your /etc/tor/torrc"
+  echo "ORPort [YOUR_IPV6_ADDRESS]:YOUR_ORPORT (example: \"ORPort [2001:123:4567:89ab::1]:9001\")"
+  echo "or for a bridge: ServerListenAddr obfs4 [..]:YOUR_OBFS4PORT"
+  echo "Then run \"sudo /etc/init.d/tor restart\" to restart Tor"
+}
+
 if $CHECK_IPV6
 then
   echoInfo "Testing IPV6..."
@@ -90,31 +118,27 @@ then
   then
     sudo /etc/init.d/tor stop
     echoError "Could not reach Tor directory servers via IPV6"
-    sudo sed -i -e '/INSERT_IPV6_ADDRESS/d' /etc/tor/torrc
-    sudo sed -i -e 's/IPv6Exit 1/IPv6Exit 0/' /etc/tor/torrc
-    echoError "IPv6 support has been disabled!"
+    disableIPV6
   else
     echoSuccess "Seems like your IPV6 connection is working"
-  fi
-
-  IPV6_ADDRESS=$(ip -6 addr | grep inet6 | grep "scope global" | awk '{print $2}' | cut -d'/' -f1)
-  if [ -z "$IPV6_ADDRESS" ]
-  then
-    sudo /etc/init.d/tor stop
-    echoError "Could not automatically find your IPv6 address"
-    sudo sed -i -e '/INSERT_IPV6_ADDRESS/d' /etc/tor/torrc
-    sudo sed -i -e 's/IPv6Exit 1/IPv6Exit 0/' /etc/tor/torrc
-    echoError "IPv6 support has been disabled!"
-  else
-    sudo sed -i "s/INSERT_IPV6_ADDRESS/$IPV6_ADDRESS/" /etc/tor/torrc
-    echoSuccess "IPv6 Support enabled ($IPV6_ADDRESS)"
+      
+    IPV6_ADDRESS=$(ip -6 addr | grep inet6 | grep "scope global" | awk '{print $2}' | cut -d'/' -f1)
+    if [ -z "$IPV6_ADDRESS" ]
+    then
+      sudo /etc/init.d/tor stop
+      echoError "Could not automatically find your IPv6 address"
+      disableIPV6
+    else
+      sudo sed -i "s/INSERT_IPV6_ADDRESS/$IPV6_ADDRESS/" /etc/tor/torrc
+      echoSuccess "IPv6 Support enabled ($IPV6_ADDRESS)"
+    fi
   fi
 fi
 
 if $ENABLE_AUTO_UPDATE
 then
   echoInfo "Enabling unattended upgrades..."
-  sudo apt-get install -y unattended-upgrades apt-listchanges
+  sudo apt-get install -y unattended-upgrades apt-listchanges > /dev/null
   DISTRO=$(lsb_release -is)
   sudo wget -q -O /etc/apt/apt.conf.d/50unattended-upgrades "https://raw.githubusercontent.com/flxn/tor-relay-configurator/master/misc/50unattended-upgrades.$DISTRO"
 fi
@@ -130,5 +154,3 @@ echo "Tor will now check if your ports are reachable. This may take up to 20 min
 echo "Check /var/log/tor/notices.log for an entry like:"
 echo "\"Self-testing indicates your ORPort is reachable from the outside. Excellent.\""
 echo "----------------------------------------------------------------------"
-#sleep 5
-#tail -f /var/log/tor/log

@@ -4,25 +4,28 @@ var presets = {
     "contactinfo": "",
     "trc-track": true,
     "orport": 9001,
-    "dirport": 9030
+    "dirport": 9030,
+    "obfs4port": null
   },
   "bridge": {
     "relayname": null,
     "contactinfo": null,
     "trc-track": null,
     "orport": "auto",
-    "dirport": null
+    "dirport": null,
+    "obfs4port": 8042
   },
   "exit": {
     "relayname": "",
     "contactinfo": "",
     "trc-track": true,
     "orport": 9001,
-    "dirport": 80
+    "dirport": 80,
+    "obfs4port": null
   }
 }
 
-$('input[name=node-type]').change(function() {
+function showRelevantFields() {
   var selectedType = $('input[name=node-type]:checked').val();
   if(selectedType == 'exit') {
     $('#exit-info').fadeIn(150);
@@ -34,15 +37,19 @@ $('input[name=node-type]').change(function() {
   for (var presetKey in preset) {
     if (preset.hasOwnProperty(presetKey)) {
       var presetValue = preset[presetKey];
-      $('#field-' + presetKey + ' input').parent().fadeIn(150);
       if(presetValue === null) {
         $('#field-' + presetKey + ' input').parent().fadeOut(150);
       } else {
-        $('#field-' + presetKey + ' input').val(presetValue);
+        $('#field-' + presetKey + ' input').parent().fadeIn(150);
       }
+      $('#field-' + presetKey + ' input').val(presetValue);
 
     }
   }
+}
+
+$('input[name=node-type]').change(function() {
+  showRelevantFields();
 });
 
 $('#exit-info').hide();
@@ -52,6 +59,7 @@ $('.only-numbers').keyup(function() {
 });
 
 $(function() {
+  showRelevantFields();
   var nodesChart = new Chart("chartNodes", {
       type: 'line',
       data: {
