@@ -2,6 +2,10 @@ body {
   font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
+.container.header {
+  margin-top: 30px;
+}
+
 .heading p {
   margin-top: -10px;
 }
@@ -26,18 +30,10 @@ p {
   margin-bottom: 1rem;
 }
 
-input#submit {
-  width: 150px;
-}
-
 div.footer {
   margin-top: 40px;
   padding: 10px;
   text-align: center;
-}
-
-.footer a {
-  color: #999;
 }
 
 h1>a {
@@ -58,22 +54,28 @@ h1>a {
 .statistics {
   border: 1px solid #ddd;
   border-radius: 3px;
-  padding: 10px 20px 10px 20px;
+  padding: 20px 10px;
 }
 
 .topnodes {
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    padding: 10px 10px 0 10px;
     text-align: center;
 }
 
-.topnodes ul {
-  margin-top: 10px;
+.topnodes ol {
+  padding: 10px 30px;
 }
 
-.topnodes ul li {
+.topnodes ol li {
     text-align: left;
+}
+
+.chart {
+  margin-top: 15px;
+}
+
+.config-section {
+  padding: 10px 30px;
+  margin-bottom: 15px;
 }
 
 .patreon {
@@ -81,4 +83,13 @@ h1>a {
   border-radius: 3px;
   padding: 10px 20px 10px 20px;
   margin-top: 20px;
+}
+
+.shariff {
+  width: 800px;
+  margin: 0 auto;
+}
+
+code {
+  padding: 10px;
 }

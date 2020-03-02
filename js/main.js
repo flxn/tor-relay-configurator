@@ -38,9 +38,9 @@ function showRelevantFields() {
     if (preset.hasOwnProperty(presetKey)) {
       var presetValue = preset[presetKey];
       if(presetValue === null) {
-        $('#field-' + presetKey + ' input').parent().fadeOut(150);
+        $('#field-' + presetKey).fadeOut(150);
       } else {
-        $('#field-' + presetKey + ' input').parent().fadeIn(150);
+        $('#field-' + presetKey).fadeIn(150);
       }
       $('#field-' + presetKey + ' input').val(presetValue);
 
@@ -71,7 +71,7 @@ $(function() {
       options: {
         responsive: true,
         title:      {
-            display: true,
+            display: false,
             text:    "# Nodes",
         },
         legend: {
@@ -125,7 +125,7 @@ $(function() {
     options: {
       responsive: true,
       title:      {
-          display: true,
+          display: false,
           text:    "Bandwidth (Mb/s)"
       },
       legend: {
