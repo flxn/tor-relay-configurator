@@ -70,9 +70,9 @@
             </tbody>
           </table>
           <p>
-          <i>The links in the table above are affiliate links. If you want to support this page you can purchase a product through one of these links and I will get a small percentage of your sale value. 100% of the money will be used for maintenance of this site and my own Tor relays.</i><br/>
-          <i>Please read the Terms of Service of the providers before signing up. Even if they allowed it in the past I do not take any responsibility if they close your account for deploying Tor.</i>
-          <br> You can find a comprehensive list of Tor-friendly companies on the <a href="https://trac.torproject.org/projects/tor/wiki/doc/GoodBadISPs" target="_blank">official Tor wiki</a>.
+            <i>The links in the table above are affiliate links. If you want to support this page you can purchase a product through one of these links and I will get a small percentage of your sale value. 100% of the money will be used for maintenance of this site and my own Tor relays.</i><br />
+            <i>Please read the Terms of Service of the providers before signing up. Even if they allowed it in the past I do not take any responsibility if they close your account for deploying Tor.</i>
+            <br> You can find a comprehensive list of Tor-friendly companies on the <a href="https://trac.torproject.org/projects/tor/wiki/doc/GoodBadISPs" target="_blank">official Tor wiki</a>.
           </p>
         </p>
         <h3 class="subtitle">Sudo</h3>

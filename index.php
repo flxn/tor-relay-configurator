@@ -3,37 +3,25 @@
 require 'vendor/autoload.php';
 require 'utils.php';
 require 'TorConfig.php';
-require 'TRCStats.php';
 
 date_default_timezone_set('UTC');
 
 Flight::set('serverCount', '-');
 Flight::set('combinedUptime', '-');
 Flight::set('combinedBandwidth', '-');
-
-if(file_exists('misc/stats.txt')) {
-  $fh = fopen('misc/stats.txt', 'r');
-  $stats = new TRCStats();
-  Flight::set('serverCount', intval(fgets($fh, 4096)));
-  Flight::set('combinedUptime', round(intval(fgets($fh, 4069))/60/60) . 'h');
-  Flight::set('combinedBandwidth', round(intval(fgets($fh, 4069))*8/1000/1000) . 'Mb/s');
-  Flight::set('currentCommit', trim(exec('git log --pretty="%h" -n1 HEAD')));
-  Flight::set('bandwidthChartJson', json_encode($stats->getBandwidthOverTime(60)));
-  Flight::set('nodesChartJson', json_encode($stats->getNodesOverTime(60)));
-  fclose($fh);
-}
-
 Flight::set('nodeslist', array());
-if(file_exists('misc/nodes.txt')) {
-    $nodes = explode("\n", file_get_contents('misc/nodes.txt'));
-    $nodeslist = array();
-    foreach ($nodes as $node) {
-        if(trim($node) == "") continue;
-        list($name, $bandwidth) = explode(';', $node);
-        $bandwidth = round($bandwidth * 8 / 1000 / 1000, 2);
-        $nodeslist[] = array('name' => $name, 'bandwidth' => $bandwidth);
-    }
-    Flight::set('nodeslist', $nodeslist);
+
+if(file_exists('misc/stats.json')) {
+  $stats = json_decode(file_get_contents('misc/stats.json'), true);
+  Flight::set('nodeslist', $stats["nodes"]);
+  Flight::set('serverCount', intval(count($stats["nodes"])));
+  Flight::set('combinedUptime', round($stats["uptime"]/60/60) . 'h');
+  Flight::set('combinedBandwidth', round(intval($stats["bandwidth"])*8/1000/1000) . 'Mb/s');
+
+  Flight::set('bandwidthChartJson', file_get_contents('misc/bandwidth_graph.json'));
+  Flight::set('nodesChartJson', file_get_contents('misc/nodes_graph.json'));
+
+  Flight::set('currentCommit', trim(exec('git log --pretty="%h" -n1 HEAD')));
 }
 
 Flight::route('GET /', function () {

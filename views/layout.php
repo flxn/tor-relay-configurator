@@ -92,11 +92,11 @@
           <strong>🏆 Top 10 Nodes 🏆</strong>
           <ol>
             <?php if (count($nodes) >= 10) { ?>
-              <li>🥇 <strong><?= $nodes[0]['name'] ?></strong> (<?= $nodes[0]['bandwidth'] ?>Mb/s)</li>
-              <li>🥈 <strong><?= $nodes[1]['name'] ?></strong> (<?= $nodes[1]['bandwidth'] ?>Mb/s)</li>
-              <li>🥉 <strong><?= $nodes[2]['name'] ?></strong> (<?= $nodes[2]['bandwidth'] ?>Mb/s)</li>
+              <li>🥇 <strong><?= $nodes[0]['nickname'] ?></strong> (<?= round($nodes[0]['bandwidth'] * 8 / 1000 / 1000) ?>Mb/s)</li>
+              <li>🥈 <strong><?= $nodes[1]['nickname'] ?></strong> (<?= round($nodes[1]['bandwidth'] * 8 / 1000 / 1000) ?>Mb/s)</li>
+              <li>🥉 <strong><?= $nodes[2]['nickname'] ?></strong> (<?= round($nodes[2]['bandwidth'] * 8 / 1000 / 1000) ?>Mb/s)</li>
               <?php for ($i = 3; $i < 10; $i++) { ?>
-                <li><strong><?= $nodes[$i]['name'] ?></strong> (<?= $nodes[$i]['bandwidth'] ?>Mb/s)</li>
+                <li><strong><?= $nodes[$i]['nickname'] ?></strong> (<?= round($nodes[$i]['bandwidth'] * 8 / 1000 / 1000) ?>Mb/s)</li>
               <?php } ?>
             <?php } ?>
           </ol>

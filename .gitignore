@@ -3,6 +3,9 @@ deploy.sh
 userconfigs/
 misc/stats.txt
 misc/nodes.txt
+misc/nodes_graph.json
+misc/bandwidth_graph.json
+misc/stats.json
 .vscode/
 *.db
 .env
