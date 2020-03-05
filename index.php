@@ -65,15 +65,39 @@ Flight::route('POST /', function () {
       }
 
       file_put_contents('userconfigs/'.$scriptFile, $template);
+      file_put_contents('userconfigs/'.$generatedScriptHash.'.torrc', $torrc);
 
-      Flight::render('installation', array(
-        'torrc' => $torrc,
-        'configFile' => $scriptFile,
-        'nyx' => isset($req->data['enable-nyx']),
-      ), 'main_content');
+      Flight::redirect("/setup/" . $generatedScriptHash);
   } catch (Exception $e) {
       Flight::render('main', array('errors' => $e->getMessage()), 'main_content');
   }
+
+  Flight::render('layout', array(
+    'title' => 'Tor Relay Configurator | Installation',
+    'serverCount' => Flight::get('serverCount'),
+    'combinedUptime' => Flight::get('combinedUptime'),
+    'combinedBandwidth' => Flight::get('combinedBandwidth'),
+    'currentCommit' => Flight::get('currentCommit'),
+    'nodes' => Flight::get('nodeslist'),
+    'bandwidthChartData' => Flight::get('bandwidthChartJson'),
+    'nodesChartData' => Flight::get('nodesChartJson')
+  ));
+});
+
+Flight::route('GET /setup/@hash', function ($hash) {
+  $validateInputRegex = '/^[\w]+$/m';
+  if (preg_match($validateInputRegex, $hash) == 0 || !file_exists('userconfigs/' . $hash . '.torrc')) {
+    // invalid format
+    Flight::redirect('/');
+    return;
+  }
+
+  $torrc = file_get_contents('userconfigs/' . $hash . '.torrc');
+
+  Flight::render('installation', array(
+    'torrc' => $torrc,
+    'configFile' => $hash . '.sh',
+  ), 'main_content');
 
   Flight::render('layout', array(
     'title' => 'Tor Relay Configurator | Installation',

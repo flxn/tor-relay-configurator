@@ -21,9 +21,9 @@
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/bulma.min.css">
-  <link rel="stylesheet" href="css/shariff.complete.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/bulma.min.css">
+  <link rel="stylesheet" href="/css/shariff.complete.css">
+  <link rel="stylesheet" href="/css/style.css">
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -124,15 +124,15 @@
     </div>
   </footer>
 
-  <script src="js/jquery.min.js"></script>
-  <script src="js/moment.min.js"></script>
-  <script src="js/Chart.min.js"></script>
-  <script src="js/shariff.min.js"></script>
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/moment.min.js"></script>
+  <script src="/js/Chart.min.js"></script>
+  <script src="/js/shariff.min.js"></script>
   <script>
     var bandwidthChartData = <?= $bandwidthChartData ?>;
     var nodesChartData = <?= $nodesChartData ?>;
   </script>
-  <script src="js/main.js"></script>
+  <script src="/js/main.js"></script>
   <!-- Matomo -->
   <script type="text/javascript">
     var _paq = _paq || [];
