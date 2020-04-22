@@ -52,12 +52,12 @@
                 <td><a href="https://www.pulseservers.com/billing/aff.php?aff=75" target="_blank">View Page</a></td>
               </tr>
               <tr>
-                <td><a href="https://my.frantech.ca/aff.php?aff=3372" target="_blank">BuyVM (Frantech)</a></td>
-                <td>United States, Luxembourg</td>
+                <td><a href="https://clients.liteserver.nl/aff.php?aff=206" target="_blank">LiteServer</a></td>
+                <td>Netherlands</td>
                 <td>yes</td>
-                <td><a href="https://buyvm.net/acceptable-use-policy/#3" target="_blank">yes</a></td>
-                <td>no</td>
-                <td><a href="https://my.frantech.ca/aff.php?aff=3372" target="_blank">View Page</a></td>
+                <td><a href="https://liteserver.nl/acceptable-usage-policy/" target="_blank">yes</a></td>
+                <td>yes</td>
+                <td><a href="https://clients.liteserver.nl/aff.php?aff=206" target="_blank">View Page</a></td>
               </tr>
               <tr>
                 <td><a href="https://m.do.co/c/7a1a3669128b" target="_blank">DigitalOcean</a></td>
