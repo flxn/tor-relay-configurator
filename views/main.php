@@ -20,59 +20,59 @@
             </thead>
             <tbody>
               <tr>
-                <td><a href="https://panel.linevast.de/aff.php?aff=416" target="_blank">Linevast</a></td>
+                <td><a href="https://panel.linevast.de/aff.php?aff=416" target="_blank" rel="noopener nofollow">Linevast</a></td>
                 <td>Germany</td>
                 <td>yes</td>
                 <td>no</td>
                 <td>yes</td>
-                <td><a href="https://panel.linevast.de/aff.php?aff=416" target="_blank">View Page</a></td>
+                <td><a href="https://panel.linevast.de/aff.php?aff=416" target="_blank" rel="noopener nofollow">View Page</a></td>
               </tr>
               <tr>
-                <td><a href="https://billing.flokinet.is/aff.php?aff=226" target="_blank">Flokinet</a></td>
+                <td><a href="https://billing.flokinet.is/aff.php?aff=226" target="_blank" rel="noopener nofollow">Flokinet</a></td>
                 <td>Romania, Iceland, Finland</td>
                 <td>yes</td>
                 <td>yes</td>
                 <td>yes</td>
-                <td><a href="https://billing.flokinet.is/aff.php?aff=226" target="_blank">View Page</a></td>
+                <td><a href="https://billing.flokinet.is/aff.php?aff=226" target="_blank" rel="noopener nofollow">View Page</a></td>
               </tr>
               <tr>
-                <td><a href="https://www.yourserver.se/portal/aff.php?aff=329" target="_blank">Yourserver</a></td>
+                <td><a href="https://www.yourserver.se/portal/aff.php?aff=329" target="_blank" rel="noopener nofollow">Yourserver</a></td>
                 <td>Sweden, Latvia</td>
                 <td>yes</td>
                 <td>no</td>
                 <td>yes</td>
-                <td><a href="https://www.yourserver.se/portal/aff.php?aff=329" target="_blank">View Page</a></td>
+                <td><a href="https://www.yourserver.se/portal/aff.php?aff=329" target="_blank" rel="noopener nofollow">View Page</a></td>
               </tr>
               <tr>
-                <td><a href="https://www.pulseservers.com/billing/aff.php?aff=75" target="_blank">PulseServers</a></td>
+                <td><a href="https://www.pulseservers.com/billing/aff.php?aff=75" target="_blank" rel="noopener nofollow">PulseServers</a></td>
                 <td>Canada, United Kingdom</td>
                 <td>yes</td>
                 <td>yes</td>
                 <td>yes</td>
-                <td><a href="https://www.pulseservers.com/billing/aff.php?aff=75" target="_blank">View Page</a></td>
+                <td><a href="https://www.pulseservers.com/billing/aff.php?aff=75" target="_blank" rel="noopener nofollow">View Page</a></td>
               </tr>
               <tr>
-                <td><a href="https://clients.liteserver.nl/aff.php?aff=206" target="_blank">LiteServer</a></td>
+                <td><a href="https://clients.liteserver.nl/aff.php?aff=206" target="_blank" rel="noopener nofollow">LiteServer</a></td>
                 <td>Netherlands</td>
                 <td>yes</td>
-                <td><a href="https://liteserver.nl/acceptable-usage-policy/" target="_blank">yes</a></td>
+                <td><a href="https://liteserver.nl/acceptable-usage-policy/" target="_blank" rel="noopener nofollow">yes</a></td>
                 <td>yes</td>
-                <td><a href="https://clients.liteserver.nl/aff.php?aff=206" target="_blank">View Page</a></td>
+                <td><a href="https://clients.liteserver.nl/aff.php?aff=206" target="_blank" rel="noopener nofollow">View Page</a></td>
               </tr>
               <tr>
-                <td><a href="https://m.do.co/c/7a1a3669128b" target="_blank">DigitalOcean</a></td>
+                <td><a href="https://m.do.co/c/7a1a3669128b" target="_blank" rel="noopener nofollow">DigitalOcean</a></td>
                 <td>United States, Netherlands,<br /> Singapore, United Kingdom,<br /> Germany, Canada, India</td>
                 <td>yes</td>
                 <td>no</td>
                 <td>no</td>
-                <td><a href="https://m.do.co/c/7a1a3669128b" target="_blank">View Page</a></td>
+                <td><a href="https://m.do.co/c/7a1a3669128b" target="_blank" rel="noopener nofollow">View Page</a></td>
               </tr>
             </tbody>
           </table>
           <p>
             <i>The links in the table above are affiliate links. If you want to support this page you can purchase a product through one of these links and I will get a small percentage of your sale value. 100% of the money will be used for maintenance of this site and my own Tor relays.</i><br />
             <i>Please read the Terms of Service of the providers before signing up. Even if they allowed it in the past I do not take any responsibility if they close your account for deploying Tor.</i>
-            <br> You can find a comprehensive list of Tor-friendly companies on the <a href="https://trac.torproject.org/projects/tor/wiki/doc/GoodBadISPs" target="_blank">official Tor wiki</a>.
+            <br> You can find a comprehensive list of Tor-friendly companies on the <a href="https://trac.torproject.org/projects/tor/wiki/doc/GoodBadISPs" target="_blank" rel="noopener">official Tor wiki</a>.
           </p>
         </p>
         <h3 class="subtitle">Sudo</h3>
@@ -88,18 +88,18 @@
         <h2 class="title">Support Tor</h2>
         <p>If you don't want to run your own server because but still want to help Tor here are some things you can do:</p>
         <p>
-          <strong>1.</strong> <a href="https://donate.torproject.org/" target="_blank" rel="noopener noreferrer">Donate to the Tor Project</a><br />
+          <strong>1.</strong> <a href="https://donate.torproject.org/" target="_blank" rel="noopener">Donate to the Tor Project</a><br />
           <span>This will directly benefit the people working for the Tor project and fund development and outreach.</span>
         </p>
         <p>
-          <strong>2.</strong> <a href="https://torservers.net/donate.html" target="_blank" rel="noopener noreferrer">Donate to Torservers.net</a><br />
+          <strong>2.</strong> <a href="https://torservers.net/donate.html" target="_blank" rel="noopener">Donate to Torservers.net</a><br />
           <span>They maintain many high-speed Tor nodes, your money will be used to increase Tor capacity.</span>
         </p>
         <p>
           <strong>3.</strong> Share this page with your friends. Maybe one of them wants to run their own server.
         </p>
         <p>
-          <strong>4.</strong> If you don't know what to do with your money you can also <a href="https://ko-fi.com/flxn256" target="_blank" rel="noopener noreferrer">Donate to me directly</a>.
+          <strong>4.</strong> If you don't know what to do with your money you can also <a href="https://ko-fi.com/flxn256" target="_blank" rel="noopener nofollow">Donate to me directly</a>.
           I will use the money to keep this site running. But please donate to the others first.
         </p>
       </div>
@@ -148,14 +148,14 @@
                 <label class="">
                   <input type="radio" name="node-type" value="bridge">
                   <span class="label-body">Bridge
-                    <span style="font-style:italic;font-size:12px;"></span>
+                    <span style="font-style:italic;font-size:12px;">(Utilizing <a href="https://support.torproject.org/glossary/obfs4/" rel="noopener">obfs4</a>)</span>
                   </span>
                 </label>
                 <br />
                 <label class="">
                   <input type="radio" name="node-type" value="exit">
                   <span class="label-body">Exit Node
-                    <span style="font-style:italic;font-size:12px;">(Following <a href="https://trac.torproject.org/projects/tor/wiki/doc/ReducedExitPolicy">ReducedExitPolicy</a>)</span>
+                    <span style="font-style:italic;font-size:12px;">(Following <a href="https://trac.torproject.org/projects/tor/wiki/doc/ReducedExitPolicy" rel="noopener">ReducedExitPolicy</a>)</span>
                   </span>
                 </label>
               </div>
@@ -164,11 +164,11 @@
             <p id="exit-info" class="notification is-warning">
               Running an Exit Node is the best way to help the Tor network but you have to be aware of the risks.
               <br> More Info:
-              <a class="italic" href="https://trac.torproject.org/projects/tor/wiki/doc/TorExitGuidelines" target="_blank">Tor Exit Guidelines</a>,
-              <a class="italic" href="https://blog.torproject.org/running-exit-node" target="_blank">Tips for Running an Exit Node with Minimal Harassment</a>
+              <a class="italic" href="https://trac.torproject.org/projects/tor/wiki/doc/TorExitGuidelines" rel="noopener" target="_blank">Tor Exit Guidelines</a>,
+              <a class="italic" href="https://blog.torproject.org/running-exit-node" rel="noopener" target="_blank">Tips for Running an Exit Node with Minimal Harassment</a>
               <br>
               <br>
-              The script will download a notice about exit nodes (<a href="https://gitweb.torproject.org/tor.git/plain/contrib/operator-tools/tor-exit-notice.html">tor-exit-note.html</a>)
+              The script will download a notice about exit nodes (<a href="https://gitweb.torproject.org/tor.git/plain/contrib/operator-tools/tor-exit-notice.html" rel="noopener">tor-exit-note.html</a>)
               to <code>/etc/tor/tor-exit-notice.html</code>
               that will be published on your selected DirPort (Default: 80).
               <br>
@@ -208,7 +208,7 @@
               <div class="control">
                 <label>
                   <input type="checkbox" name="ipv6" checked>
-                  <span class="label-body">Enable IPv6 support (<a href="https://trac.torproject.org/projects/tor/wiki/doc/IPv6RelayHowto" target="_blank">More info</a>)</span>
+                  <span class="label-body">Enable IPv6 support (<a href="https://trac.torproject.org/projects/tor/wiki/doc/IPv6RelayHowto" rel="noopener" target="_blank">More info</a>)</span>
                 </label>
               </div>
             </div>
@@ -300,7 +300,7 @@
               <div class="control">
                 <label>
                   <input type="checkbox" name="enable-nyx">
-                  <span class="label-body">Enable monitoring through <a href="https://nyx.torproject.org/" target="_blank">nyx</a></span>
+                  <span class="label-body">Enable monitoring through <a href="https://nyx.torproject.org/" rel="noopener" target="_blank">nyx</a></span>
                 </label>
 
               </div>
