@@ -5,8 +5,8 @@ APT::Periodic::Verbose "1";
 
 Unattended-Upgrade::Mail "root";	
 
-Unattended-Upgrade::Allowed-Origins {
-  "${distro_id}:${distro_codename}-security";
+Unattended-Upgrade::Origins-Pattern {
+  "origin=Debian,codename=${distro_codename},label=Debian-Security";
   "origin=TorProject";
 };
 
