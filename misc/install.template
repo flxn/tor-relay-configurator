@@ -128,7 +128,7 @@ then
     disableIPV6
   else
     echoSuccess "Seems like your IPV6 connection is working"
-      
+
     IPV6_ADDRESS=$(ip -6 addr | grep inet6 | grep "scope global" | awk '{print $2}' | cut -d'/' -f1)
     if [ -z "$IPV6_ADDRESS" ]
     then
@@ -158,6 +158,9 @@ then
   sudo apt-get install -y unattended-upgrades apt-listchanges > /dev/null && echoSuccess "-> install OK" || handleError
   DISTRO=$(lsb_release -is)
   sudo wget -q -O /etc/apt/apt.conf.d/50unattended-upgrades "https://raw.githubusercontent.com/flxn/tor-relay-configurator/master/misc/50unattended-upgrades.$DISTRO" && echoSuccess "-> wget OK" || handleError
+  echoInfo "Don't install recommends..."
+  sudo wget -q -O /etc/apt/apt.conf.d/40norecommends "https://raw.githubusercontent.com/flxn/tor-relay-configurator/master/misc/40norecommends" && echoSuccess "-> wget OK" || handleError
+
 fi
 
 sleep 10
