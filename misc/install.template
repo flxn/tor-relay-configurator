@@ -160,7 +160,6 @@ then
   sudo wget -q -O /etc/apt/apt.conf.d/50unattended-upgrades "https://raw.githubusercontent.com/flxn/tor-relay-configurator/master/misc/50unattended-upgrades.$DISTRO" && echoSuccess "-> wget OK" || handleError
   echoInfo "Don't install recommends..."
   sudo wget -q -O /etc/apt/apt.conf.d/40norecommends "https://raw.githubusercontent.com/flxn/tor-relay-configurator/master/misc/40norecommends" && echoSuccess "-> wget OK" || handleError
-
 fi
 
 sleep 10
