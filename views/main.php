@@ -3,6 +3,11 @@
     <div class="columns">
       <div class="column">
         <h2 class="title">Prerequisites</h2>
+        <div class="notification">
+          This site is about running your own Tor node to participate in the Tor network. 
+          If you just want to privately surf the web through Tor, check out the Torproject's official <a href="https://www.torproject.org/de/download/" target="_blank" rel="noopener nofollow">Tor Browser</a>
+          or the <a href="https://brave.com/tor149" target="_blank" rel="noopener nofollow">Brave Browser</a> which has Private Browsing Windows powered by Tor.
+        </div>
         <h3 class="subtitle">Hosting</h3>
         <p>
           You can run your Tor relay on every supported linux machine that you have SSH access to, be it in your home, a virtual server, or a dedicated server.
@@ -99,8 +104,7 @@
           <strong>3.</strong> Share this page with your friends. Maybe one of them wants to run their own server.
         </p>
         <p>
-          <strong>4.</strong> If you don't know what to do with your money you can also <a href="https://ko-fi.com/flxn256" target="_blank" rel="noopener nofollow">Donate to me directly</a>.
-          I will use the money to keep this site running. But please donate to the others first.
+          <strong>4.</strong> If you want to help keep this site running, you can also <a href="https://ko-fi.com/flxn256" target="_blank" rel="noopener nofollow">Donate to me directly</a> or try the <a href="https://brave.com/tor149" target="_blank" rel="noopener nofollow">Brave Browser</a> with built-in Adblocker and Tor via <a href="https://brave.com/tor149" target="_blank" rel="noopener nofollow">my link</a>.
         </p>
       </div>
     </div>
