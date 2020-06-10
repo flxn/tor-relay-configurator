@@ -25,9 +25,9 @@ function echoSuccess() {
 
 function handleError() {
   echoError "-> ERROR"
-  sudo /etc/init.d/tor restart
+  sudo /etc/init.d/tor stop
   echoError "An error occured on the last setup step."
-  echoError "If you think there is a problem with this script you can share your system information for debugging: tor@flxn.de"
+  echoError "If you think there is a problem with this script please share information about the error and you system configuration for debugging: tor@flxn.de"
 }
 
 echo -e $C_CYAN #cyan
@@ -70,7 +70,16 @@ sudo apt-get -y update > /dev/null && echoSuccess "-> OK" || handleError
 if $INSTALL_NYX
 then
   echoInfo "Installing NYX..."
-  sudo apt-get -y install nyx > /dev/null && echoSuccess "-> OK" || echoError "-> Error but continuing anyway...\nVisit nyx website for installation instructions: https://nyx.torproject.org/"
+  NYX_INSTALL_OK=false
+  sudo apt-get -y install python3-distutils &> /dev/null
+  sudo apt-get -y install nyx > /dev/null && NYX_INSTALL_OK=true && echoSuccess "-> OK" || echoError "-> Error installing NYX via apt"
+
+  if [ ! NYX_INSTALL_OK ]
+  then
+    echoInfo "Trying again via pip..."
+    sudo apt-get -y install python3-pip > /dev/null
+    sudo pip3 install nyx > /dev/null && echoSuccess "-> OK" || echoError "-> pip install failed too.\nPlease check the nyx homepage: https://nyx.torproject.org/#download"
+  fi
 fi
 
 echoInfo "Installing Tor..."
