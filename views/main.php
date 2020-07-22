@@ -1,5 +1,5 @@
   <!-- Primary Page Layout -->
-  <div class="container">
+  <div class="container content">
     <div class="columns">
       <div class="column">
         <h2 class="title">Prerequisites</h2>

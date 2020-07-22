@@ -4,6 +4,11 @@ body {
 
 .container.header {
   margin-top: 30px;
+  padding: 10px;
+}
+
+.container.content {
+  padding: 10px;
 }
 
 .heading p {
@@ -30,7 +35,7 @@ p {
   margin-bottom: 1rem;
 }
 
-div.footer {
+footer {
   margin-top: 40px;
   padding: 10px;
   text-align: center;
@@ -86,7 +91,7 @@ h1>a {
 }
 
 .shariff {
-  width: 800px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
