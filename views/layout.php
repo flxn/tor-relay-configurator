@@ -45,7 +45,7 @@
         <h1 class="title"><a href="/">Tor Relay Configurator</a></h1>
         <p class="subtitle">
           Get your own Tor Relay up and running in 5 minutes. <a href="https://www.torproject.org/about/overview.html.en" target="_blank">What is Tor?</a><br />
-          <a href="https://flxn.de/blog/tor-relay-tutorial" target="_blank">Visit my blog</a> for a tutorial on how to use the tor-relay.co generator.
+          <a href="https://flxn.de/posts/tor-relay-tutorial/" target="_blank">Visit my blog</a> for a tutorial on how to use the tor-relay.co generator.
         </p>
       </div>
       <div class="column" title="Statistics updated daily">
