@@ -126,14 +126,11 @@
               <div class="control">
                 <div class="select">
                   <select name="os" id="os-select">
-                    <option value="jessie">Debian oldstable (jessie)</option>
-                    <option value="stretch" selected="selected">Debian 9 (stretch)</option>
-                    <option value="buster">Debian 10 (buster)</option>
-                    <option value="sid">Debian unstable (sid)</option>
-                    <option value="trusty">Ubuntu Trusty Tahr (14.04 LTS)</option>
-                    <option value="xenial">Ubuntu Xenial Xerus (16.04 LTS)</option>
-                    <option value="artful">Ubuntu Artful Aardvark (17.10)</option>
+                    <option value="jessie">Debian 8 (jessie)</option>
+                    <option value="stretch">Debian 9 (stretch)</option>
+                    <option value="buster" selected="selected">Debian 10 (buster)</option>
                     <option value="bionic">Ubuntu Bionic Beaver (18.04 LTS)</option>
+                    <option value="focal">Ubuntu Focal Fossa (20.04 LTS)</option>
                   </select>
                 </div>
               </div>
