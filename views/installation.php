@@ -36,7 +36,7 @@
       </p>
       <h3 class="subtitle">SSH</h3>
       <p>When you run a relay server you will see an increase in SSH login attempts.<br>
-        To increase sever security you should disable root login via password or only allow public-key access in general.<br>
+        To increase server security you should disable root login via password or only allow public-key access in general.<br>
         <br>
         First make sure that you added a user you can login with.<br>
         <a href="https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04">The Digitalocean Community provides some tips for initial server setup.</a>
