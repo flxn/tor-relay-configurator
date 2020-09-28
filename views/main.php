@@ -6,7 +6,7 @@
         <div class="notification">
           This site is about running your own Tor node to participate in the Tor network. 
           If you just want to privately surf the web through Tor, check out the Torproject's official <a href="https://www.torproject.org/de/download/" target="_blank" rel="noopener nofollow">Tor Browser</a>
-          or the <a href="https://brave.com/tor149" target="_blank" rel="noopener nofollow">Brave Browser</a> which has Private Browsing Windows powered by Tor.
+          or the <a href="https://brave.com/tor149" target="_blank" rel="noopener nofollow">Brave Browser</a> which offers Private Browsing windows powered by Tor.
         </div>
         <h3 class="subtitle">Hosting</h3>
         <p>

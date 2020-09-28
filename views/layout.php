@@ -44,8 +44,10 @@
       <div class="column">
         <h1 class="title"><a href="/">Tor Relay Configurator</a></h1>
         <p class="subtitle">
-          Get your own Tor Relay up and running in 5 minutes. <a href="https://www.torproject.org/about/overview.html.en" target="_blank">What is Tor?</a><br />
-          <a href="https://flxn.de/posts/tor-relay-tutorial/" target="_blank">Visit my blog</a> for a tutorial on how to use the tor-relay.co generator.
+          Get your own Tor Relay up and running in seconds.<br />
+          <a href="https://www.torproject.org/about/overview.html.en" target="_blank">What is Tor?</a>
+          | <a href="https://flxn.de" target="_blank">Who made this?</a>
+          <!--<a href="https://flxn.de/posts/tor-relay-tutorial/" target="_blank">Visit my blog</a> for a tutorial on how to use the tor-relay.co generator.-->
         </p>
       </div>
       <div class="column" title="Statistics updated daily">
@@ -108,6 +110,13 @@
   <?php echo $main_content; ?>
 
   <footer class="footer">
+    <div class="notification">
+      <div class="columns">
+        <div class="column is-1 is-size-3">🌈</div>
+        <div class="column">Interested in development? Check out my newest side project <strong>landof.dev</strong> where you can <a href="https://landof.dev/awesome">discover GitHub repositories and development resources about hundreds of topics</a>.</div>
+        <div class="column is-1 is-size-3">🌈</div>
+      </div>
+    </div>
     <div class="content has-text-centered">
       <p>
         If you have a problem/question/suggestion email me at <b>mail [at] flxn [dot] de</b>
