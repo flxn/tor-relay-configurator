@@ -61,8 +61,7 @@ echo "deb https://deb.torproject.org/torproject.org $RELEASE main" | sudo tee /e
 echo "deb-src https://deb.torproject.org/torproject.org $RELEASE main" | sudo tee --append /etc/apt/sources.list.d/tor.list > /dev/null && echoSuccess "-> tee2 OK" || handleError
 
 echoInfo "Adding Torproject GPG key..."
-curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import > /dev/null && echoSuccess "-> gpg import OK" || handleError
-gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add - && echoSuccess "-> key-add OK" || handleError
+curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | sudo apt-key add - && echoSuccess "-> OK" || handleError
 
 echoInfo "Updating package list..."
 sudo apt-get -y update > /dev/null && echoSuccess "-> OK" || handleError
