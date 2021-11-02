@@ -1,0 +1,3 @@
+LC_ALL=en_US.UTF-8
+0 */2 * * * python3 /var/www/statCollector.py > /dev/null
+0 20 * * 6 python3 /var/www/twitter_bot.py > /dev/null

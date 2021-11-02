@@ -48,7 +48,7 @@ STAT_FIELDS = {
 }
 
 class TorStatsUpdater(object):
-    def __construct(self):
+    def __init__(self):
         if not os.path.exists(os.path.join(os.path.dirname(__file__), DB_FILE_NAME)):
             self.init_database()
 
