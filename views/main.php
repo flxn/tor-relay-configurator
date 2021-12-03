@@ -129,6 +129,7 @@
                     <option value="jessie">Debian 8 (jessie)</option>
                     <option value="stretch">Debian 9 (stretch)</option>
                     <option value="buster" selected="selected">Debian 10 (buster)</option>
+                    <option value="bullseye">Debian 11 (bullseye)</option>
                     <option value="bionic">Ubuntu Bionic Beaver (18.04 LTS)</option>
                     <option value="focal">Ubuntu Focal Fossa (20.04 LTS)</option>
                   </select>
