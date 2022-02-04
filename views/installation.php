@@ -36,7 +36,7 @@
       </p>
       <h3 class="subtitle">SSH</h3>
       <p>When you run a relay server you will see an increase in SSH login attempts.<br>
-        To increase server security you should disable root login via password or only allow public-key access in general.<br>
+        To increase server security you should disable root login via password or only allow public-key access in general and disable SSH Protocol 1 in favor of the more secure Protocol 2.<br>
         <br>
         First make sure that you added a user you can login with.<br>
         <a href="https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04">The Digitalocean Community provides some tips for initial server setup.</a>
@@ -48,7 +48,9 @@
         <pre><code id="shellcode">PermitRootLogin yes</code></pre><br />
         And change it to
         <pre><code id="shellcode">PermitRootLogin without-password</code></pre><br />
-        After that restart the SSH service
+        By default, SSH uses Protocol 1. To change this to the more secure Protocol 2, add the line below to the sshd_config configuration file:
+        <pre><code id="shellcode">Protocol 2</code></pre><br />      
+        After that save and restart the SSH service
         <pre><code id="shellcode">service ssh restart</code></pre><br />
       </p>
       <h3 class="subtitle">Services</h3>
